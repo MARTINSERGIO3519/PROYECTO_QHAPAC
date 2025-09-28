@@ -2,11 +2,11 @@
 ---
 
 ## Descripción del proyecto
-Qhapac es una aplicación web educativa e interactiva diseñada para que los usuarios puedan aprender sobre la historia del Perú de manera divertida y dinámica. La aplicación combina elementos de narrativa tipo árbol de decisiones con actividades interactivas que permiten a los jugadores tomar decisiones en diferentes situaciones históricas, lo que impacta directamente en los resultados y finales de cada historia.  
+Qhapac es una aplicación web educativa e interactiva destinada a los estudiantes de entre 6 a 12 años que buscan aprender sobre la historia del Perú de manera divertida, concisa y dinámica.
 
-El objetivo principal de Qhapac es fomentar el aprendizaje activo y la comprensión de eventos históricos importantes del Perú, incentivando la toma de decisiones, la reflexión y el análisis crítico. Los usuarios pueden explorar diferentes caminos históricos, enfrentarse a dilemas similares a los de los personajes históricos y descubrir múltiples finales dependiendo de sus elecciones.  
+El objetivo principal de Qhapac es fomentar el aprendizaje activo y la comprensión de eventos históricos importantes del Perú, incentivando la lectura y autodidacia mediante historietas, reflexión y análisis crítico. Los usuarios pueden explorar diferentes periodos históricos con ayuda de materiales didácticos atractivos, tales como historietas, imágenes ilustradas, videos y quizzes para poner a prueba su aprendizaje. Además, hacer crecer su lado competitivo, al contar con un sistema de rankings que se actualiza cada semana.
 
-El proyecto está construido con un backend robusto en **Spring Boot**, que se encarga de la gestión de usuarios, el registro de decisiones y la conexión con la base de datos **MySQL**. El frontend está desarrollado en **React**, usando **Bootstrap** para ofrecer una interfaz amigable, intuitiva y responsive, que puede ser utilizada en distintos dispositivos. Qhapac está pensado tanto para estudiantes de historia como para cualquier persona interesada en conocer la historia del Perú de forma entretenida e interactiva.
+El proyecto está construido con un backend robusto en **Spring Boot**, que se encarga de la gestión de usuarios, el registro de decisiones y la conexión con la base de datos **MySQL**. El frontend está desarrollado en **React**, usando **Bootstrap** para ofrecer una interfaz amigable, intuitiva y responsive, que puede ser utilizada en distintos dispositivos. Qhapac está pensado tanto para estudiantes de historia, pero puede igualmente atraer a cualquier persona interesada en conocer la historia del Perú de forma entretenida e interactiva.
 
 ## Tecnologías usadas
 - **Backend:** Spring Boot  
@@ -38,6 +38,7 @@ spring.datasource.username=root
 spring.datasource.password=martin01
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 ~~~
+
 4. Ejecuta el archivo TpCursoIntegradorApplication.java
 <img width="989" height="223" alt="image" src="https://github.com/user-attachments/assets/06f21215-3935-47be-a56b-64fe986964f2" />
 
@@ -45,9 +46,13 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
      1.  Backend:
          * pom.xml:
          Contiene las dependencias para asegurar la comunicación, seguridad y funcionalidad con la base de datos.
+         <img width="189" height="54" alt="image" src="https://github.com/user-attachments/assets/7ee2cf5e-bbc5-4bc1-b1cd-06dff2333768" />
+
 
          * WebConfig:
          Permite la comunicación entre un servidor frontend http React (puerto 3000) con el servidor backend Springboot(puerto 8090) usando la clase CordRegistry.
+         <img width="401" height="52" alt="image" src="https://github.com/user-attachments/assets/0466647e-6c4a-477b-a870-cbf665d86e23" />
+
 
          * Clases DTO:   
           Representan las clases que almacenarán los datos recibidos por el usuario cuando este realice una petición HTTP.   
