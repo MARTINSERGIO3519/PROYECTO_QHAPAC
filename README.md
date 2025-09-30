@@ -16,7 +16,8 @@ El proyecto está construido con un backend robusto en **Spring Boot**, que se e
 
 ## Capturas de pantalla
 * Menu de loguin
-<img width="1898" height="982" alt="image" src="https://github.com/user-attachments/assets/950b5d31-fa2e-4120-ad1b-0ce384ffd400" />
+<img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/8c3f912c-941f-431c-93a5-eaaddd79e0f2" />
+
 
 
 ## Instalación y ejecución
