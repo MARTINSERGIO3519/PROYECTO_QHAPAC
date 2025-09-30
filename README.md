@@ -81,7 +81,7 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
       2. Frontend:
          * Menú de loguin:
            Permitirá al usuario registrarse, crear sus credenciales, recuperar su contraseña y loguearse en el sistema.
-           <img width="1897" height="979" alt="image" src="https://github.com/user-attachments/assets/8d391e60-ecf0-433e-86f3-5fabf7bdb930" />
+           <img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/102f2596-bdfc-4984-8ebc-b597cee15d38" />
          * Menú tutorial:
            Permitirá responder a dudas frecuentes de los usuarios sobre el funcionamiento de la página.
            
