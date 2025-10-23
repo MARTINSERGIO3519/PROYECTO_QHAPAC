@@ -19,6 +19,12 @@ public class Users {
     @Column(name = "fecha_registro")
     private LocalDateTime fechaRegistro;
 
+    @Column(name = "codigo_temporal")
+    private String codigoTemporal;
+
+    @Column(name = "fecha_expira_codigo")
+    private LocalDateTime fechaExpiraCodigo;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Admin admin;
 
@@ -34,7 +40,7 @@ public class Users {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Sesiones> sesiones;
 
-    // Getters y Setters
+    // Getters y Setters de todos los campos, incluyendo los nuevos
     public Integer getIdUsuario() { return idUsuario; }
     public void setIdUsuario(Integer idUsuario) { this.idUsuario = idUsuario; }
 
@@ -53,6 +59,12 @@ public class Users {
     public LocalDateTime getFechaRegistro() { return fechaRegistro; }
     public void setFechaRegistro(LocalDateTime fechaRegistro) { this.fechaRegistro = fechaRegistro; }
 
+    public String getCodigoTemporal() { return codigoTemporal; }
+    public void setCodigoTemporal(String codigoTemporal) { this.codigoTemporal = codigoTemporal; }
+
+    public LocalDateTime getFechaExpiraCodigo() { return fechaExpiraCodigo; }
+    public void setFechaExpiraCodigo(LocalDateTime fechaExpiraCodigo) { this.fechaExpiraCodigo = fechaExpiraCodigo; }
+
     public Admin getAdmin() { return admin; }
     public void setAdmin(Admin admin) { this.admin = admin; }
 
@@ -68,4 +80,5 @@ public class Users {
     public List<Sesiones> getSesiones() { return sesiones; }
     public void setSesiones(List<Sesiones> sesiones) { this.sesiones = sesiones; }
 }
+
 

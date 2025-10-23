@@ -77,22 +77,21 @@ public class UserController {
         }
 
         try {
-            Optional<String> tempOpt = userService.recuperarContrasena(correo);
+            Optional<String> tempOpt = userService.generarCodigoTemporal(correo);
             if (tempOpt.isPresent()) {
-                String tempPass = tempOpt.get();
+                String tempCodigo = tempOpt.get();
                 try {
                     emailService.enviarCorreo(
                             correo,
                             "Recuperación de contraseña",
-                            "Tu nueva contraseña temporal es: " + tempPass + "\nCámbiala después de iniciar sesión."
+                            "Tu código temporal es: " + tempCodigo + "\nCámbiala después de iniciar sesión."
                     );
                     respuesta.put("success", true);
                     respuesta.put("message", "Se ha enviado un correo de recuperación a " + correo);
                 } catch (Exception mailEx) {
-                    // el guardado en BD ya se hizo. Informamos fallo de envío pero no devolvemos undefined.
                     mailEx.printStackTrace();
                     respuesta.put("success", false);
-                    respuesta.put("message", "Se generó la contraseña, pero falló el envío del correo: " + mailEx.getMessage());
+                    respuesta.put("message", "Se generó el código, pero falló el envío del correo: " + mailEx.getMessage());
                 }
             } else {
                 respuesta.put("success", false);
@@ -106,4 +105,39 @@ public class UserController {
 
         return respuesta;
     }
+
+    @PostMapping("/change-password")
+    public Map<String, Object> cambiarContrasena(@RequestBody Map<String, String> datos) {
+        String correo = datos.get("correo");
+        String codigo = datos.get("codigo");
+        String nueva = datos.get("nuevaContrasena");
+        String confirmar = datos.get("confirmarContrasena");
+
+        Map<String, Object> respuesta = new HashMap<>();
+
+        if (correo == null || codigo == null || nueva == null || confirmar == null) {
+            respuesta.put("success", false);
+            respuesta.put("message", "Todos los campos son obligatorios");
+            return respuesta;
+        }
+
+        if (!nueva.equals(confirmar)) {
+            respuesta.put("success", false);
+            respuesta.put("message", "Las contraseñas no coinciden");
+            return respuesta;
+        }
+
+        boolean ok = userService.cambiarContrasenaConCodigo(correo, codigo, nueva);
+
+        if (ok) {
+            respuesta.put("success", true);
+            respuesta.put("message", "✅ Contraseña cambiada correctamente");
+        } else {
+            respuesta.put("success", false);
+            respuesta.put("message", "❌ Código inválido o expirado");
+        }
+
+        return respuesta;
+    }
 }
+

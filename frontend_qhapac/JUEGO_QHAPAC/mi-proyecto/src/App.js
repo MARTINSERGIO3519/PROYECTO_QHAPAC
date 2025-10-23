@@ -8,7 +8,7 @@ import Tutorial from './pages/Tutorial';
 import Login from './pages/Login';
 import RecuperarContraseña from './components/RecuperarContraseña';
 import CambiarContraseña from './pages/CambiarContraseña';
-
+import DashboardAdmin from './pages/DashboardAdmin'; // Asegúrate de importar el DashboardAdmin
 
 function App() {
   const [usuario, setUsuario] = useState(null);
@@ -53,10 +53,13 @@ function App() {
         {/* Cambiar contraseña */}
         <Route path="/cambiar" element={<CambiarContraseña volverLogin={() => window.location.href = '/login'} />} />
 
-        {/* Rutas protegidas */}
-        <Route path="/inicio" element={<RutaPrivada><Inicio /></RutaPrivada>} />
-        <Route path="/tutorial" element={<RutaPrivada><Tutorial /></RutaPrivada>} />
-        <Route path="/puntuaciones" element={<RutaPrivada><Puntuaciones /></RutaPrivada>} />
+        {/* Rutas no restringidas */}
+        <Route path="/inicio" element={<Inicio />} />
+        <Route path="/tutorial" element={<Tutorial />} />
+        <Route path="/puntuaciones" element={<Puntuaciones />} />
+        
+        {/* Dashboard Admin (ya no es restringido) */}
+        <Route path="/dashboard-admin" element={<DashboardAdmin />} />
       </Routes>
 
       <Footer />

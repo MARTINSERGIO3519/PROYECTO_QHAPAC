@@ -1,0 +1,60 @@
+/* UserTable.css */
+
+/* Estilo para la tabla */
+.table-responsive {
+  margin-top: 20px;
+}
+
+.table {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-out;
+}
+
+.table th,
+.table td {
+  padding: 15px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 16px;
+}
+
+.table th {
+  background-color: #e60000;
+  color: white;
+  font-weight: bold;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table-bordered {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Animación para las filas de la tabla */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.table tr:hover {
+  background-color: #f0e0e0;
+  cursor: pointer;
+}
+
+/* Diseño de la tabla cuando no hay usuarios */
+.table td {
+  font-style: italic;
+  color: #888;
+}

@@ -29,6 +29,7 @@ export default function Navbar() {
         <Link to="/tutorial">Tutorial</Link>
         <Link to="/puntuaciones">Record</Link>
         <Link to="/login">Perfil</Link>
+         <Link to="/dashboard-admin">Dashboard Admin</Link>
         <button className="search">🔍</button>
       </nav>
 
