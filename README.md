@@ -16,7 +16,8 @@ El proyecto está construido con un backend robusto en **Spring Boot**, que se e
 
 ## Capturas de pantalla
 * Menu de loguin
-<img width="1898" height="982" alt="image" src="https://github.com/user-attachments/assets/950b5d31-fa2e-4120-ad1b-0ce384ffd400" />
+<img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/8c3f912c-941f-431c-93a5-eaaddd79e0f2" />
+
 
 
 ## Instalación y ejecución
@@ -80,7 +81,7 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
       2. Frontend:
          * Menú de loguin:
            Permitirá al usuario registrarse, crear sus credenciales, recuperar su contraseña y loguearse en el sistema.
-           <img width="1897" height="979" alt="image" src="https://github.com/user-attachments/assets/8d391e60-ecf0-433e-86f3-5fabf7bdb930" />
+           <img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/102f2596-bdfc-4984-8ebc-b597cee15d38" />
          * Menú tutorial:
            Permitirá responder a dudas frecuentes de los usuarios sobre el funcionamiento de la página.
            

@@ -1,0 +1,516 @@
+:root {
+    /*Tutorial------------------------------*/
+    --bg-img: url("../../public/MEDIA/IMAGES/BACKGROUNDS/fondoClaroTutorial.png");
+    --color-texto: #000;
+    --color-primario: #007BFF;
+    --color-primario-hover: #a9cef671;
+    --color-secundario: #333;
+    --color-secundario-suave: #33333345;
+    --color-fondo-claro: #fff;
+    --color-fondo-footer: #f5f5f5;
+    --color-footer-texto: #a9a3a3;
+    --color-hover: #f0f0f0;
+    --color-hover-secundario: #025dbf;
+    --color-alerta: #ffdddd;
+    --color-alerta-texto: #d00;
+    --color-btn-dark: #2d4db6;
+    --color-footer-bottom: #191919;
+    --color-footer-bottom-texto: #fffdfd;
+    --color-hover-logo: invert(0);
+
+
+    /*-Login----------------------*/
+    --bg-img-login: url("../../public/MEDIA/IMAGES/BACKGROUNDS/fondoClaroLogin.png");
+    --color-titulo: #f5b041;
+    --color-subtitulo: #ffffff;
+    --color-fondo-form: rgba(255, 255, 255, 0.2);
+    --color-input-fondo: #fff;
+    --color-input-texto: #333;
+    --color-btn-primario: #4a6cf7;
+    --color-btn-secundario: #7a57d1;
+    --color-btn-texto: #fff;
+    --color-cerrar: #ff0000;
+    --color-cerrar-hover: #ff4c4c;
+}
+
+:root.dark-mode {
+    /*Tutorial------------------------------*/
+    --bg-img: url("../../public/MEDIA/IMAGES/BACKGROUNDS/fondoOscuroTutorial.png");
+    --color-texto: #e0e0e0;
+    --color-primario: #0a7ced;
+    --color-primario-hover: #7b93ad71;
+    --color-secundario: #fefefe;
+    --color-secundario-suave: #dddddd45;
+    --color-fondo-claro: #201f1f;
+    --color-fondo-footer: #1e1e1e;
+    --color-footer-texto: #888;
+    --color-hover: #333;
+    --color-hover-secundario: #438fdc;
+    --color-alerta: #442222;
+    --color-alerta-texto: #ff7777;
+    --color-btn-dark: #4466cc;
+    --color-footer-bottom: #000;
+    --color-footer-bottom-texto: #e0e0e0;
+    --color-hover-logo: invert(1);
+
+    /*Login----------------------*/
+    --bg-img-login: url("../../public/MEDIA/IMAGES/BACKGROUNDS/fondoOscuroLogin.png");
+    --color-titulo: #f5b041;
+    --color-subtitulo: #f1f1f1;
+    --color-fondo-form: rgba(0, 0, 0, 0.6);
+    --color-input-fondo: #222;
+    --color-input-texto: #f1f1f1;
+    --color-btn-primario: #3751c7;
+    --color-btn-secundario: #5a3ea6;
+    --color-btn-texto: #fff;
+    --color-cerrar: #ff0000;
+    --color-cerrar-hover: #ff4c4c;
+}
+
+
+/*--------------------------------*/
+/*body----------------------------*/
+/*--------------------------------*/
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--color-texto);
+}
+
+/*--------------------------------*/
+/*header--------------------------*/
+/*--------------------------------*/
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 25px 20px;
+}
+
+.principal_logo {
+    width: 120px;
+    border-radius: 50%;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: clamp(15px, 4vw, 80px);
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.navbar a {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-secundario);
+    text-decoration: none;
+    padding: 8px 30px;
+}
+
+.navbar a.active {
+    color: var(--color-primario);
+    padding: 8px 40px;
+    background-color: var(--color-primario-hover);
+    border-radius: 999px;
+}
+
+.search {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Perfil */
+.perfil {
+    position: relative;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    background: var(--color-fondo-claro);
+    padding: 4px 6px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.dropdown {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background: var(--color-fondo-claro);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    width: 140px;
+    padding: 8px 0;
+}
+
+.dropdown a {
+    display: block;
+    padding: 8px 14px;
+    font-size: 14px;
+    color: var(--color-secundario);
+    text-decoration: none;
+}
+
+.dropdown a:hover {
+    background: var(--color-hover);
+    color: var(--color-hover-secundario);
+}
+
+.cerrar-cuenta:hover {
+    background: var(--color-alerta) !important;
+    color: var(--color-alerta-texto) !important;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/*--------------------------------*/
+/*botones-------------------------*/
+/*--------------------------------*/
+
+.sticky-buttons {
+    position: fixed;
+    bottom: 4rem;
+    left: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.btn {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 0 12px 12px 0;
+    cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-fondo-claro);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s;
+    user-select: none;
+}
+
+.btn.dark {
+    background: var(--color-btn-dark);
+    color: var(--color-fondo-claro);
+}
+
+.faq {
+    position: fixed;
+    bottom: 4.5rem;
+    left: 80px;
+    width: 250px;
+    max-height: 300px;
+    overflow-y: auto;
+    background: var(--color-fondo-claro);
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+}
+
+.faq.hidden {
+    display: none;
+}
+
+.faq h3 {
+    margin-top: 0;
+    font-size: 16px;
+}
+
+/*--------------------------------*/
+/*footer--------------------------*/
+/*--------------------------------*/
+
+footer {
+    background-color: var(--color-fondo-footer);
+    padding: 20px 0 0 0;
+    width: 100%;
+    max-width: 2000px;
+    color: var(--color-footer-texto);
+    text-decoration: none;
+}
+
+footer h3 {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.principal_footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: var(--color-secundario-suave) 1px solid;
+    gap: 15px;
+    margin: 10px 5rem;
+}
+
+.navbar_footer {
+    display: flex;
+    align-items: center;
+    gap: clamp(5px, 2vw, 20px);
+    text-decoration: none;
+    font-style: unset;
+    margin-left: 2rem;
+}
+
+.navbar_footer a {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-secundario);
+    text-decoration: none;
+}
+
+.social-media {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    gap: clamp(10px, 2vw, 25px);
+    margin-right: 2rem;
+}
+
+.social-media-logos img {
+    width: 25px;
+    margin: 0 .2rem;
+    filter: var(--color-hover-logo);
+}
+
+
+.so_logo:hover {
+    filter: invert(.6);
+    border-radius: 49%;
+}
+
+
+.alianzas-content {
+    width: clamp(300px, 15vw, 500px);
+}
+
+.alianzas-logos {
+    display: flex;
+    align-items: center;
+    justify-content: left
+}
+
+.secondary_footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 10px 5rem;
+    padding-bottom: 20px;
+    border-top: var(--color-secundario-suave) 1px solid;
+    flex-wrap: wrap;
+
+}
+
+.alianzas-logos img {
+    width: 60px;
+    margin: 0 40px;
+}
+
+.secondary_footer-left {
+    display: flex;
+    flex-direction: row;
+    max-width: 900px;
+    margin-left: 2rem;
+    margin-top: 2rem;
+}
+
+.secondary_footer-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-width: 700px;
+    margin-top: 1rem;
+}
+
+.muni_lima-logo {
+    width: 150px;
+    margin-left: 5rem;
+    margin-right: 2rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: .5px 0;
+    font-size: 14px;
+    color: var(--color-footer-bottom-texto);
+    background-color: var(--color-footer-bottom);
+}
+/* ============================= */
+/* Estilos Responsivos           */
+/* ============================= */
+
+/* --- Para pantallas grandes (default) --- */
+/* No necesitas cambiar nada aquí, ya que tu diseño está pensado en desktop */
+
+/* --- Tablets (<= 1024px) --- */
+@media (max-width: 1024px) {
+    .header {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 15px;
+    }
+
+    .navbar {
+        gap: 20px;
+        padding: 6px 15px;
+    }
+
+    .navbar a {
+        font-size: 14px;
+        padding: 6px 18px;
+    }
+
+    .principal_footer-content,
+    .secondary_footer-content {
+        margin: 10px 2rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .secondary_footer-left,
+    .secondary_footer-right {
+        flex-direction: column;
+        margin: 1rem 0;
+    }
+
+    .muni_lima-logo {
+        margin: 1rem auto;
+    }
+}
+
+/* --- Smartphones (<= 768px) --- */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 8px 12px;
+    }
+
+    .navbar a {
+        font-size: 13px;
+        padding: 5px 12px;
+    }
+
+    .avatar img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .sticky-buttons {
+        bottom: 2rem;
+        gap: 6px;
+    }
+
+    .btn {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+
+    .faq {
+        width: 200px;
+        left: 65px;
+    }
+
+    footer h3 {
+        text-align: center;
+    }
+
+    .navbar_footer {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-left: 0;
+    }
+
+    .social-media {
+        justify-content: center;
+        margin: 15px 0;
+    }
+
+    .alianzas-content {
+        width: 100%;
+        text-align: center;
+    }
+
+    .alianzas-logos {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .alianzas-logos img {
+        margin: 10px;
+        width: 50px;
+    }
+}
+
+/* --- Móviles pequeños (<= 480px) --- */
+@media (max-width: 480px) {
+    .principal_logo {
+        width: 90px;
+    }
+
+    .navbar {
+        gap: 8px;
+        border-radius: 10px;
+        padding: 6px 10px;
+    }
+
+    .navbar a {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+
+    .dropdown {
+        width: 120px;
+    }
+
+    .faq {
+        width: 180px;
+        font-size: 14px;
+    }
+
+    .alianzas-logos img {
+        width: 40px;
+    }
+
+    .muni_lima-logo {
+        width: 100px;
+    }
+
+    .footer-bottom {
+        font-size: 12px;
+        padding: 4px;
+    }
+}
