@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function RecuperarContraseña() {
+function RecuperarContraseña() { // <- QUITA el parámetro volverLogin
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [mensaje, setMensaje] = useState('');
@@ -10,68 +10,82 @@ function RecuperarContraseña() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email) {
-      alert('Ingrese su Gmail');
+      alert('Ingrese su correo electrónico');
       return;
     }
 
     setLoading(true);
+    setMensaje('');
     try {
-      const response = await fetch("http://localhost:8090/users/recover", {
+      const response = await fetch("http://localhost:8090/api/auth/recuperar-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ correo: email })
       });
 
-      const resultado = await response.json();
+      const data = await response.json();
 
-      if (resultado.success) {
-        // Mostrar mensaje de espera
-        setMensaje("✅ Correo enviado. Serás redirigido a la página de cambio de contraseña en unos segundos...");
-        
-        // Esperar 2 segundos y redirigir
+      if (response.ok) {
+        setMensaje("✅ " + data.mensaje);
+        // Redirigir después de 2 segundos
         setTimeout(() => {
-          navigate("/cambiar", { state: { correo: email } });
+          navigate('/cambiar-contraseña', { state: { email: email } });
         }, 2000);
       } else {
-        alert(resultado.message);
+        setMensaje("❌ " + (data.mensaje || "Error al enviar el código"));
       }
     } catch (error) {
       console.error(error);
-      alert('Error de conexión con el servidor');
+      setMensaje("❌ Error de conexión con el servidor");
     } finally {
       setLoading(false);
     }
   };
 
+  const handleVolverLogin = () => {
+    navigate('/login'); // <- Agrega esta función
+  };
+
   return (
     <div className="login-container d-flex justify-content-center align-items-center vh-100">
-      <form className="login-form p-4 shadow rounded" onSubmit={handleSubmit}>
+      <form className="login-form p-4 shadow rounded bg-white" onSubmit={handleSubmit}>
         <h2 className="text-center mb-4">Recuperar Contraseña</h2>
 
-        {mensaje && <div className="alert alert-success">{mensaje}</div>}
-
-        {!mensaje && (
-          <>
-            <div className="mb-3">
-              <label className="form-label">Correo</label>
-              <input 
-                type="email" 
-                className="form-control" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-                disabled={loading}
-              />
-            </div>
-
-            <button 
-              type="submit" 
-              className="btn btn-warning w-100 mb-2" 
-              disabled={loading}
-            >
-              {loading ? "Enviando..." : "Recuperar contraseña"}
-            </button>
-          </>
+        {mensaje && (
+          <div className={`alert ${mensaje.includes('✅') ? 'alert-success' : 'alert-danger'}`}>
+            {mensaje}
+          </div>
         )}
+
+        <div className="mb-3">
+          <label className="form-label">Correo Electrónico</label>
+          <input 
+            type="email" 
+            className="form-control" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+            disabled={loading}
+            required
+          />
+        </div>
+
+        <button 
+          type="submit" 
+          className="btn btn-warning w-100 mb-2" 
+          disabled={loading}
+        >
+          {loading ? "Enviando..." : "Enviar Código de Recuperación"}
+        </button>
+
+        <button 
+          type="button" 
+          className="btn btn-link w-100" 
+          onClick={handleVolverLogin} // <- Cambia aquí
+          style={{boxShadow: 'none'}}
+          disabled={loading}
+        >
+          Volver al login
+        </button>
       </form>
     </div>
   );

@@ -13,9 +13,15 @@ function Login({ onLogin }) {
   const mostrarRecuperar = () => setPantalla('recuperar');
   const volverLogin = () => setPantalla('login');
 
-  const manejarLoginExitoso = () => {
-    if (onLogin) onLogin();
-    navigate("/inicio"); // 🚀 redirigir tras login
+  const manejarLoginExitoso = (usuarioData) => {
+    if (onLogin) onLogin(usuarioData);
+    
+    // Redirigir según el rol del usuario
+    if (usuarioData && usuarioData.idRol === 1) {
+      navigate("/dashboard-admin"); // Admin va al dashboard
+    } else {
+      navigate("/inicio"); // Usuarios normales van al inicio
+    }
   };
 
   return (

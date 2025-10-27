@@ -1,8 +1,123 @@
 .login-page {
     background: var(--bg-img-login) center/cover no-repeat;
-    min-height: 100vh;     /* que cubra toda la pantalla */
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.login-form h1 {
+    color: var(--color-titulo);
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Mejorar los inputs */
+.login-form .form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 12px 15px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.login-form .form-control:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 0.2rem rgba(74, 108, 247, 0.25);
+}
+
+/* Botones mejorados */
+.login-form .btn {
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.login-form .btn-primary {
+    background: var(--color-btn-primario);
+    border: none;
+}
+
+.login-form .btn-primary:hover {
+    background: var(--color-hover-secundario);
+    transform: translateY(-2px);
+}
+
+.login-form .btn-success {
+    background: var(--color-btn-secundario);
+    border: none;
+}
+
+.login-form .btn-success:hover {
+    background: #6a45c2;
+    transform: translateY(-2px);
+}
+
+/* Links mejorados */
+.login-form .btn-link {
+    color: var(--color-primario);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-form .btn-link:hover {
+    color: var(--color-hover-secundario);
+    text-decoration: underline;
+}
+
+/* Alertas */
+.login-form .alert {
+    border-radius: 10px;
+    border: none;
+    font-weight: 500;
+}
+
+/* Input group para contraseña */
+.login-form .input-group .btn-outline-secondary {
+    border: 2px solid #e9ecef;
+    border-left: none;
+    transition: all 0.3s ease;
+}
+
+.login-form .input-group .btn-outline-secondary:hover {
+    background-color: #f8f9fa;
+    border-color: #e9ecef;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-page {
+        padding: 10px;
+    }
+    
+    .login-form {
+        margin: 10px;
+        padding: 20px !important;
+    }
+    
+    .login-form h1 {
+        font-size: 2rem;
+    }
+}
   

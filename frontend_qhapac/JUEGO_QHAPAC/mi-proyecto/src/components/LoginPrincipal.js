@@ -5,40 +5,79 @@ function LoginPrincipal({ onLogin, mostrarRegistro, mostrarRecuperar }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
 
     if (!email || !password) {
-      alert('Ingrese Gmail y contraseña');
+      alert('Ingrese correo y contraseña');
       return;
     }
 
+    setLoading(true);
     try {
-      const response = await fetch("http://localhost:8090/users/login", {
+      const response = await fetch("http://localhost:8090/api/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ correo: email, contrasena: password }),
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({ 
+          correo: email, 
+          contrasenia: password 
+        }),
       });
 
-      if (!response.ok) {
-        alert('Error en el servidor. Inténtelo más tarde');
-        return;
-      }
+      console.log("Respuesta del login:", response.status);
 
-      const resultado = await response.json();
-
-      if (resultado.success) {
-        alert(resultado.message);
-        localStorage.setItem("usuario", email);
-        if (onLogin) onLogin();
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Login exitoso:", data);
+        
+        // VERIFICAR QUE LOS NOMBRES DE PROPIEDADES COINCIDAN
+        const userData = {
+          id: data.usuarioId,        // ← debe coincidir con 'usuarioId' del DTO
+          nombre: data.nombre,
+          apellido: data.apellido,
+          email: data.correo,
+          idRol: data.idRol          // ← debe coincidir con 'idRol' del DTO
+        };
+        
+        console.log("Datos del usuario para localStorage:", userData);
+        
+        localStorage.setItem("usuario", JSON.stringify(userData));
+        
+        // Pasar los datos completos al onLogin
+        if (onLogin) onLogin(userData);
       } else {
-        alert(resultado.message);
+        const errorText = await response.text();
+        console.error("Error en login:", errorText);
+        
+        if (response.status === 401) {
+          setError("Credenciales inválidas. Verifique su correo y contraseña.");
+        } else {
+          setError(errorText || 'Error en el login');
+        }
       }
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
-      alert('No se pudo conectar con el servidor');
+      setError('No se pudo conectar con el servidor');
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    if (error) setError('');
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    if (error) setError('');
   };
 
   return (
@@ -46,15 +85,23 @@ function LoginPrincipal({ onLogin, mostrarRegistro, mostrarRecuperar }) {
       <form className="login-form p-4 shadow rounded bg-white" onSubmit={handleSubmit}>
         <h1 className="text-center mb-4">QHAPAC</h1>
 
-        {/* Gmail */}
+        {/* Mensaje de error */}
+        {error && (
+          <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
+        )}
+
+        {/* Email */}
         <div className="mb-3">
-          <label className="form-label">Gmail</label>
+          <label className="form-label">Correo Electrónico</label>
           <input
             type="email"
-            className="form-control"
+            className={`form-control ${error ? 'is-invalid' : ''}`}
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
             required
+            disabled={loading}
           />
         </div>
 
@@ -64,15 +111,17 @@ function LoginPrincipal({ onLogin, mostrarRegistro, mostrarRecuperar }) {
           <div className="input-group">
             <input
               type={passwordVisible ? "text" : "password"}
-              className="form-control"
+              className={`form-control ${error ? 'is-invalid' : ''}`}
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
               required
+              disabled={loading}
             />
             <button
               type="button"
               className="btn btn-outline-secondary"
               onClick={() => setPasswordVisible(!passwordVisible)}
+              disabled={loading}
             >
               <i className={`bi ${passwordVisible ? "bi-eye-slash" : "bi-eye"}`}></i>
             </button>
@@ -82,16 +131,17 @@ function LoginPrincipal({ onLogin, mostrarRegistro, mostrarRecuperar }) {
         {/* Recuperar contraseña */}
         <button
           type="button"
-          className="btn btn-link w-100"
+          className="btn btn-link w-100 mb-3"
           style={{ boxShadow: 'none' }}
           onClick={mostrarRecuperar}
+          disabled={loading}
         >
           No recuerdo mi contraseña
         </button>
 
         {/* Ingresar */}
-        <button type="submit" className="btn btn-primary w-100 mb-2">
-          Ingresar
+        <button type="submit" className="btn btn-primary w-100 mb-2" disabled={loading}>
+          {loading ? "Iniciando sesión..." : "Ingresar"}
         </button>
 
         {/* Crear cuenta */}
@@ -99,6 +149,7 @@ function LoginPrincipal({ onLogin, mostrarRegistro, mostrarRecuperar }) {
           type="button"
           className="btn btn-success w-100"
           onClick={mostrarRegistro}
+          disabled={loading}
         >
           Crear Cuenta
         </button>

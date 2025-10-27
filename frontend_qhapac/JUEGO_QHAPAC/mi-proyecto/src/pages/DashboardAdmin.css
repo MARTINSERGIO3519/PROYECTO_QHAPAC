@@ -1,49 +1,780 @@
-/* Fondo y diseño del Dashboard */
-.dashboard-container {
-  background-color: #f2d4d4; /* Fondo rojo suave */
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+/* DashboardAdmin.css - Actualizado con estilo Perfil */
+.dashboard-admin-container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px 0;
 }
 
-/* Título del Dashboard */
-.dashboard-container h1 {
-  font-size: 2.5rem;
-  color: #800000; /* Color rojo oscuro */
+.dashboard-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-title {
+  color: #2d3748;
   font-weight: 700;
-  text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
+  font-size: 2.5rem;
 }
 
-/* Botón de descarga */
-.dashboard-container .btn-success {
-  background-color: #e60000; /* Rojo intenso */
-  border-color: #cc0000;
-  color: rgb(0, 0, 0); /* Color del texto en blanco */
-  font-size: 18px; /* Ajustar tamaño de la fuente */
-  font-weight: 600;
-  padding: 20px 160px; /* Reducir padding para un tamaño más manejable */
-  border-radius: 5px;
-  text-transform: uppercase;
-  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-  transition: background-color 0.3s ease, transform 0.3s ease;
+.dashboard-subtitle {
+  color: #718096;
+  margin-bottom: 0;
+  font-size: 1.1rem;
 }
 
-.dashboard-container .btn-success:hover {
-  background-color: #c20000;
-  border-color: #a30000;
-  cursor: pointer;
-}
-
-.dashboard-container .btn-success:active {
-  transform: translateY(2px); /* Efecto de presión en el botón */
-}
-
-/* Para alinear el botón al centro */
-.dashboard-container .text-center {
-  margin-top: 30px;
+.vista-selector {
   display: flex;
-  justify-content: center; /* Centra el botón horizontalmente */
-  align-items: center; /* Centra el botón verticalmente si es necesario */
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* ===== BOTONES CON ESTILO PERFIL ===== */
+.btn-vista {
+  border-radius: 25px;
+  padding: 12px 24px;
+  font-weight: 600;
+  border: 2px solid #e2e8f0;
+  background: white;
+  color: #4a5568;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  min-width: 140px;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-vista::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
   width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn-vista:hover::before {
+  left: 100%;
+}
+
+.btn-vista.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-vista:hover:not(.active) {
+  border-color: #667eea;
+  color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+}
+
+/* Botones principales del dashboard */
+.btn-crear-usuario,
+.btn-actualizar,
+.btn-descargar-excel {
+  border-radius: 25px;
+  padding: 14px 28px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  font-size: 1.1rem;
+  min-width: 180px;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-crear-usuario::before,
+.btn-actualizar::before,
+.btn-descargar-excel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn-crear-usuario:hover::before,
+.btn-actualizar:hover::before,
+.btn-descargar-excel:hover::before {
+  left: 100%;
+}
+
+.btn-crear-usuario:active,
+.btn-actualizar:active,
+.btn-descargar-excel:active {
+  transform: translateY(2px);
+}
+
+.btn-crear-usuario {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: white;
+  box-shadow: 0 6px 20px rgba(72, 187, 120, 0.4);
+}
+
+.btn-crear-usuario:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(72, 187, 120, 0.6);
+  color: white;
+}
+
+.btn-actualizar {
+  background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+  color: white;
+  box-shadow: 0 6px 20px rgba(237, 137, 54, 0.4);
+}
+
+.btn-actualizar:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(237, 137, 54, 0.6);
+  color: white;
+}
+
+.btn-descargar-excel {
+  background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+  color: white;
+  box-shadow: 0 6px 20px rgba(229, 62, 62, 0.4);
+}
+
+.btn-descargar-excel:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(229, 62, 62, 0.6);
+  color: white;
+}
+
+/* ===== BOTONES DEL MODAL ===== */
+/* Contenedor del modal */
+.modal-content {
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-bottom: none;
+  padding: 20px 25px;
+  position: relative;
+}
+
+.modal-header h5 {
+  margin: 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.modal-body {
+  padding: 25px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.modal-footer {
+  border-top: 1px solid #e9ecef;
+  padding: 20px 25px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* Botones específicos del modal */
+.modal-footer .btn {
+  border-radius: 25px;
+  padding: 12px 28px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  font-size: 1rem;
+  min-width: 120px;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.modal-footer .btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.modal-footer .btn:hover::before {
+  left: 100%;
+}
+
+.modal-footer .btn:active {
+  transform: translateY(2px);
+}
+
+/* Botón primario del modal (Confirmar) */
+.modal-footer .btn-primary {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: white;
+  box-shadow: 0 6px 20px rgba(72, 187, 120, 0.4);
+}
+
+.modal-footer .btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(72, 187, 120, 0.6);
+  background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+  color: white;
+}
+
+/* Botón secundario del modal (Cancelar) */
+.modal-footer .btn-secondary {
+  background: linear-gradient(135deg, #a0aec0 0%, #718096 100%);
+  color: white;
+  box-shadow: 0 6px 20px rgba(113, 128, 150, 0.4);
+}
+
+.modal-footer .btn-secondary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(113, 128, 150, 0.6);
+  background: linear-gradient(135deg, #718096 0%, #4a5568 100%);
+  color: white;
+}
+
+/* Asegurar que el texto de los botones del modal se mantenga en una línea */
+.modal-footer .btn .spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.15em;
+  margin-right: 0.5rem;
+}
+
+.modal-footer .btn i.bi {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Botones de acción en la tabla */
+.btn-group .btn {
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  font-size: 0.9rem;
+  min-width: 90px;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.btn-group .btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn-group .btn:hover::before {
+  left: 100%;
+}
+
+/* Botones específicos de la tabla */
+.btn-outline-warning {
+  background: transparent;
+  border: 2px solid #ed8936;
+  color: #ed8936;
+  box-shadow: 0 4px 15px rgba(237, 137, 54, 0.2);
+}
+
+.btn-outline-warning:hover {
+  background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(237, 137, 54, 0.4);
+  border-color: transparent;
+}
+
+.btn-outline-success {
+  background: transparent;
+  border: 2px solid #48bb78;
+  color: #48bb78;
+  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.2);
+}
+
+.btn-outline-success:hover {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(72, 187, 120, 0.4);
+  border-color: transparent;
+}
+
+.btn-outline-secondary {
+  background: transparent;
+  border: 2px solid #718096;
+  color: #718096;
+  box-shadow: 0 4px 15px rgba(113, 128, 150, 0.2);
+}
+
+.btn-outline-secondary:hover {
+  background: linear-gradient(135deg, #718096 0%, #4a5568 100%);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(113, 128, 150, 0.4);
+  border-color: transparent;
+}
+
+.btn-outline-danger {
+  background: transparent;
+  border: 2px solid #e53e3e;
+  color: #e53e3e;
+  box-shadow: 0 4px 15px rgba(229, 62, 62, 0.2);
+}
+
+.btn-outline-danger:hover {
+  background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 62, 62, 0.4);
+  border-color: transparent;
+}
+
+/* Botones del formulario */
+.btn-success {
+  border-radius: 25px;
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  min-width: 160px;
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(72, 187, 120, 0.4);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.btn-success::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn-success:hover::before {
+  left: 100%;
+}
+
+.btn-success:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(72, 187, 120, 0.6);
+  background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+}
+
+.btn-secondary {
+  border-radius: 25px;
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  min-width: 140px;
+  background: linear-gradient(135deg, #a0aec0 0%, #718096 100%);
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(113, 128, 150, 0.4);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn-secondary:hover::before {
+  left: 100%;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(113, 128, 150, 0.6);
+  background: linear-gradient(135deg, #718096 0%, #4a5568 100%);
+}
+
+/* Estados de loading para botones */
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Estilos para los campos de contraseña con ojito */
+.password-toggle {
+  border-radius: 0 12px 12px 0;
+  border: 2px solid #e9ecef;
+  border-left: none;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+  color: #6c757d;
+}
+
+.password-toggle:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.input-group .form-control {
+  border-right: none;
+}
+
+.input-group .form-control:focus + .password-toggle {
+  border-color: #667eea;
+  background: #667eea;
+  color: white;
+}
+
+/* Asegurar que el input group se vea bien */
+.input-group {
+  display: flex;
+  align-items: stretch;
+}
+
+.input-group .form-control:focus {
+  border-right: none;
+}
+
+.password-toggle:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+/* ===== TARJETAS Y ESTILOS GENERALES ===== */
+/* Tarjetas de estadísticas */
+.stat-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card.primary {
+  border-left: 4px solid #667eea;
+}
+
+.stat-card.success {
+  border-left: 4px solid #48bb78;
+}
+
+.stat-card.warning {
+  border-left: 4px solid #ed8936;
+}
+
+.stat-card.info {
+  border-left: 4px solid #38b2ac;
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.stat-info h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #2d3748;
+}
+
+.stat-info p {
+  color: #718096;
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+/* Controles de administración */
+.admin-controls {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Tarjetas */
+.crear-usuario-card,
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-bottom: none;
+  padding: 20px 25px;
+  position: relative;
+}
+
+.card-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  opacity: 0.3;
+}
+
+.card-header h5 {
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+/* Tabla */
+.table {
+  margin-bottom: 0;
+}
+
+.table th {
+  border-bottom: 2px solid #e2e8f0;
+  font-weight: 700;
+  color: #4a5568;
+  background: #f7fafc;
+}
+
+.table td {
+  border-color: #edf2f7;
+  vertical-align: middle;
+}
+
+/* Alertas */
+.alert {
+  border-radius: 15px;
+  border: none;
+  font-weight: 600;
+  padding: 15px 20px;
+}
+
+.alert-success {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  color: #155724;
+  border-left: 4px solid #28a745;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #f8d7da 0%, #f1b0b7 100%);
+  color: #721c24;
+  border-left: 4px solid #dc3545;
+}
+
+/* Formularios */
+.form-control {
+  border-radius: 12px;
+  padding: 12px 15px;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Badges */
+.badge {
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.crear-usuario-card,
+.card {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.stat-card {
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding: 20px;
+  }
+  
+  .dashboard-title {
+    font-size: 2rem;
+  }
+  
+  .vista-selector {
+    justify-content: center;
+    margin-top: 15px;
+  }
+  
+  .admin-controls {
+    justify-content: center;
+  }
+  
+  .table-responsive {
+    font-size: 0.9rem;
+  }
+  
+  .btn-crear-usuario,
+  .btn-actualizar,
+  .btn-descargar-excel {
+    padding: 12px 20px;
+    font-size: 1rem;
+    min-width: 160px;
+  }
+  
+  .btn-group .btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    min-width: 70px;
+  }
+
+  /* Modal responsive */
+  .modal-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .modal-footer .btn {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .admin-controls {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .admin-controls .btn {
+    min-width: 100%;
+    max-width: 100%;
+  }
+  
+  .btn-vista {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    min-width: 120px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .form-actions .btn {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .modal-body {
+    padding: 20px;
+    font-size: 1rem;
+  }
+
+  .modal-footer {
+    padding: 15px 20px;
+  }
 }
