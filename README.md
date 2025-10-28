@@ -15,8 +15,9 @@ El proyecto está construido con un backend robusto en **Spring Boot**, que se e
 - **Herramientas de desarrollo:** IntelliJ IDEA, MySQL Workbench, Node.js, npm
 
 ## Capturas de pantalla
-* Menu de loguin
-<img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/8c3f912c-941f-431c-93a5-eaaddd79e0f2" />
+* Menu de login
+<img width="1904" height="906" alt="image" src="https://github.com/user-attachments/assets/887b93c9-bbd9-4d4a-8952-49b3114f454f" />
+
 
 
 
@@ -42,6 +43,8 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 4. Ejecuta el archivo TpCursoIntegradorApplication.java
 <img width="989" height="223" alt="image" src="https://github.com/user-attachments/assets/06f21215-3935-47be-a56b-64fe986964f2" />
+
+
 
 5. Estructura del proyecto:
      1.  Backend:
@@ -79,9 +82,10 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
         Define las API a las que se podrá conectar el usuario y las combina con los métodos ya establecidos en las clases Service.
          <img width="407" height="68" alt="image" src="https://github.com/user-attachments/assets/adcf56d4-9cd6-42d2-9f52-f4edb315df59" />
       2. Frontend:
-         * Menú de loguin:
-           Permitirá al usuario registrarse, crear sus credenciales, recuperar su contraseña y loguearse en el sistema.
-           <img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/102f2596-bdfc-4984-8ebc-b597cee15d38" />
+         * Menú de Inicio:
+           Permitirá al Interactuar al usuario con las preguntas, historietas y videos eductativos.
+           <img width="1904" height="909" alt="image" src="https://github.com/user-attachments/assets/835e3bf1-8eba-4dd3-a82f-474323af6603" />
+
          * Menú tutorial:
            Permitirá responder a dudas frecuentes de los usuarios sobre el funcionamiento de la página.
            
