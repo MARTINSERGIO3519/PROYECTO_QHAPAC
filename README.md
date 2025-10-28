@@ -41,7 +41,8 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 ~~~
 
 4. Ejecuta el archivo TpCursoIntegradorApplication.java
-<img width="989" height="223" alt="image" src="https://github.com/user-attachments/assets/06f21215-3935-47be-a56b-64fe986964f2" />
+<img width="1904" height="906" alt="image" src="https://github.com/user-attachments/assets/1548461b-34ff-4981-9c9b-16de5f7f8bc1" />
+
 
 5. Estructura del proyecto:
      1.  Backend:
