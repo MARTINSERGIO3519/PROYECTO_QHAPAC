@@ -83,7 +83,7 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
          <img width="407" height="68" alt="image" src="https://github.com/user-attachments/assets/adcf56d4-9cd6-42d2-9f52-f4edb315df59" />
       2. Frontend:
          * Menú de Inicio:
-           Permitirá al usuario registrarse, crear sus credenciales, recuperar su contraseña y loguearse en el sistema.
+           Permitirá al Interactuar al usuario con las preguntas, historietas y videos eductativos.
            <img width="1904" height="909" alt="image" src="https://github.com/user-attachments/assets/835e3bf1-8eba-4dd3-a82f-474323af6603" />
 
          * Menú tutorial:
