@@ -16,7 +16,8 @@ El proyecto está construido con un backend robusto en **Spring Boot**, que se e
 
 ## Capturas de pantalla
 * Menu de loguin
-<img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/8c3f912c-941f-431c-93a5-eaaddd79e0f2" />
+<img width="1904" height="906" alt="image" src="https://github.com/user-attachments/assets/887b93c9-bbd9-4d4a-8952-49b3114f454f" />
+
 
 
 
@@ -41,7 +42,8 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 ~~~
 
 4. Ejecuta el archivo TpCursoIntegradorApplication.java
-<img width="1904" height="906" alt="image" src="https://github.com/user-attachments/assets/1548461b-34ff-4981-9c9b-16de5f7f8bc1" />
+<img width="1903" height="911" alt="image" src="https://github.com/user-attachments/assets/039115ab-0e58-4a57-b5d0-c5b104fe9f24" />
+
 
 
 5. Estructura del proyecto:
