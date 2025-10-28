@@ -1,0 +1,8 @@
+.login-page {
+    background: var(--bg-img-login) center/cover no-repeat;
+    min-height: 100vh;     /* que cubra toda la pantalla */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

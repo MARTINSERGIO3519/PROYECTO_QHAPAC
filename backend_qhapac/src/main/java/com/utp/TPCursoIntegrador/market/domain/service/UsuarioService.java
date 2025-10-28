@@ -1,11 +1,11 @@
 package com.utp.TPCursoIntegrador.market.domain.service;
 
 import com.utp.TPCursoIntegrador.market.domain.dto.*;
-import com.utp.TPCursoIntegrador.market.domain.mapper.UsuarioMapper;
+import com.utp.TPCursoIntegrador.market.persistence.mapper.UsuarioMapper;
 import com.utp.TPCursoIntegrador.market.persistence.entity.Usuario;
 import com.utp.TPCursoIntegrador.market.persistence.entity.Credenciales;
-import com.utp.TPCursoIntegrador.market.persistence.repository.UsuarioRepository;
-import com.utp.TPCursoIntegrador.market.persistence.repository.CredencialesRepository;
+import com.utp.TPCursoIntegrador.market.domain.repository.UsuarioRepository;
+import com.utp.TPCursoIntegrador.market.domain.repository.CredencialesRepository;
 import com.google.common.base.Preconditions;
 import com.google.common.hash.Hashing;
 import org.slf4j.Logger;

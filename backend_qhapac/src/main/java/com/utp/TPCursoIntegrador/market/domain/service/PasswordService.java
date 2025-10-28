@@ -3,7 +3,7 @@ package com.utp.TPCursoIntegrador.market.domain.service;
 import com.google.common.base.Strings;
 import com.google.common.hash.Hashing;
 import com.utp.TPCursoIntegrador.market.persistence.entity.Credenciales;
-import com.utp.TPCursoIntegrador.market.persistence.repository.CredencialesRepository;
+import com.utp.TPCursoIntegrador.market.domain.repository.CredencialesRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
