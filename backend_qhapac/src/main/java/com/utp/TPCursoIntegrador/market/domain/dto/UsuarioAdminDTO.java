@@ -62,4 +62,20 @@ public class UsuarioAdminDTO {
 
     public Integer getId_Estado_Usuario() { return id_Estado_Usuario; }
     public void setId_Estado_Usuario(Integer id_Estado_Usuario) { this.id_Estado_Usuario = id_Estado_Usuario; }
+
+    @Override
+    public String toString() {
+        return "UsuarioAdminDTO{" +
+                "idUsuario=" + idUsuario +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", email='" + email + '\'' +
+                ", idRol=" + idRol +
+                ", experiencia_Total=" + experiencia_Total +
+                ", experiencia_Semanal=" + experiencia_Semanal +
+                ", horas_Semanales=" + horas_Semanales +
+                ", fecha_Registro=" + fecha_Registro +
+                ", id_Estado_Usuario=" + id_Estado_Usuario +
+                '}';
+    }
 }

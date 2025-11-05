@@ -18,14 +18,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class EstadisticaNotaPorNivelService {
-    
+
     @Autowired
     private EstadisticaNotaPromPorNivel estNotaPorNivel;
-    
+
     public List<Estadistica_Nota_Prom_Nivel_DTO> obtenerNotasPromedioPorNivel(){
         return estNotaPorNivel.obtenerNotasPromedioPorNivel();
     };
-    
+
     public void exportarNotasExcel(String rutaArchivo) throws IOException {
         List<Estadistica_Nota_Prom_Nivel_DTO> lista = estNotaPorNivel.obtenerNotasPromedioPorNivel();
 

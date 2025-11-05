@@ -62,4 +62,19 @@ public class Usuario {
 
     public Integer getIdEstadoUsuario() { return idEstadoUsuario; }
     public void setIdEstadoUsuario(Integer idEstadoUsuario) { this.idEstadoUsuario = idEstadoUsuario; }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "idUsuario=" + idUsuario +
+                ", idRol=" + idRol +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", experienciaTotal=" + experienciaTotal +
+                ", experienciaSemanal=" + experienciaSemanal +
+                ", horasSemanales=" + horasSemanales +
+                ", fechaRegistro=" + fechaRegistro +
+                ", idEstadoUsuario=" + idEstadoUsuario +
+                '}';
+    }
 }

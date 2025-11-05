@@ -23,4 +23,12 @@ public class LoginDTO {
 
     public String getContrasenia() { return contrasenia; }
     public void setContrasenia(String contrasenia) { this.contrasenia = contrasenia; }
+
+    @Override
+    public String toString() {
+        return "LoginDTO{" +
+                "correo='" + correo + '\'' +
+                ", contrasenia='" + contrasenia + '\'' +
+                '}';
+    }
 }

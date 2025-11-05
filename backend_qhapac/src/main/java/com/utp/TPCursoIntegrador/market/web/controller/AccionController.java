@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/Accion")
-public class AccionControler {
+public class AccionController {
     private AccionService accionService;
 
-    public AccionControler(AccionService accionService) {
+    public AccionController(AccionService accionService) {
         this.accionService = accionService;
     }
     

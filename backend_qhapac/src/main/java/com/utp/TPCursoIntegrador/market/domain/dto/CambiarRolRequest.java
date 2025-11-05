@@ -18,4 +18,12 @@ public class CambiarRolRequest {
 
     public Integer getNuevoRol() { return nuevoRol; }
     public void setNuevoRol(Integer nuevoRol) { this.nuevoRol = nuevoRol; }
+
+    @Override
+    public String toString() {
+        return "CambiarRolRequest{" +
+                "idUsuario=" + idUsuario +
+                ", nuevoRol=" + nuevoRol +
+                '}';
+    }
 }

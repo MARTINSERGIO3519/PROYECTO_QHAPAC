@@ -8,22 +8,18 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-/**
- *
- * @author danie
- */
 @Entity
 @Table(name="nivel")
 public class Nivel {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_Nivel;
-    
+
     private String nombre_Nivel;
-    
+
     private String desripcion_Nivel;
-    
+
     @ManyToOne
     @JoinColumn(name= "id_Periodo")
     private Periodo periodo;
@@ -59,8 +55,15 @@ public class Nivel {
     public void setPeriodo(Periodo periodo) {
         this.periodo = periodo;
     }
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Nivel{" +
+                "id_Nivel=" + id_Nivel +
+                ", nombre_Nivel='" + nombre_Nivel + '\'' +
+                ", desripcion_Nivel='" + desripcion_Nivel + '\'' +
+                ", periodo=" + periodo +
+                '}';
+    }
+
 }

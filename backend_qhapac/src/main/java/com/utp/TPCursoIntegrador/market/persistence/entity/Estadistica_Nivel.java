@@ -9,26 +9,22 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 
-/**
- *
- * @author danie
- */
 @Entity
 @Table(name= "estadistica_nivel")
 public class Estadistica_Nivel {
-    
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id_Estadistica_Nivel;
-    
+
     @ManyToOne
     @JoinColumn(name= "id_Nivel")
     private Nivel nivel;
-    
+
     private int nota_Promedio;
-    
+
     private LocalDate fecha;
-    
+
     private int partidas_Jugadas;
 
     public Integer getId_Estadistica_Nivel() {
@@ -70,7 +66,15 @@ public class Estadistica_Nivel {
     public void setPartidas_Jugadas(int partidas_Jugadas) {
         this.partidas_Jugadas = partidas_Jugadas;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Estadistica_Nivel{" +
+                "id_Estadistica_Nivel=" + id_Estadistica_Nivel +
+                ", nivel=" + nivel +
+                ", nota_Promedio=" + nota_Promedio +
+                ", fecha=" + fecha +
+                ", partidas_Jugadas=" + partidas_Jugadas +
+                '}';
+    }
 }

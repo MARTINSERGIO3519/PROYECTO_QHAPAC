@@ -32,4 +32,15 @@ public class LoginResponseDTO {
 
     public Integer getIdRol() { return idRol; }
     public void setIdRol(Integer idRol) { this.idRol = idRol; }
+
+    @Override
+    public String toString() {
+        return "LoginResponseDTO{" +
+                "usuarioId=" + usuarioId +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", correo='" + correo + '\'' +
+                ", idRol=" + idRol +
+                '}';
+    }
 }

@@ -31,4 +31,13 @@ public class Tema {
 
     public List<Preguntas> getPreguntas() { return preguntas; }
     public void setPreguntas(List<Preguntas> preguntas) { this.preguntas = preguntas; }
+
+    @Override
+    public String toString() {
+        return "Tema{" +
+                "idTema=" + idTema +
+                ", nombreTema='" + nombreTema + '\'' +
+                ", periodo=" + periodo +
+                '}';
+    }
 }

@@ -68,4 +68,16 @@ public class Preguntas {
     public void setRespuestas(List<Respuestas> respuestas) {
         this.respuestas = respuestas;
     }
+
+    @Override
+    public String toString() {
+        return "Preguntas{" +
+                "idPregunta=" + idPregunta +
+                ", enunciado='" + enunciado + '\'' +
+                ", nivel='" + nivel + '\'' +
+                ", fechaCreacion=" + fechaCreacion +
+                ", tema=" + tema +
+                ", respuestas=" + respuestas +
+                '}';
+    }
 }

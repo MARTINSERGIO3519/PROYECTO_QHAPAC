@@ -9,4 +9,12 @@ public class ResetPasswordRequest {
     public void setCodigoTemporal(String codigoTemporal) { this.codigoTemporal = codigoTemporal; }
     public String getNuevaContrasenia() { return nuevaContrasenia; }
     public void setNuevaContrasenia(String nuevaContrasenia) { this.nuevaContrasenia = nuevaContrasenia; }
+
+    @Override
+    public String toString() {
+        return "ResetPasswordRequest{" +
+                "codigoTemporal='" + codigoTemporal + '\'' +
+                ", nuevaContrasenia='" + nuevaContrasenia + '\'' +
+                '}';
+    }
 }

@@ -12,7 +12,7 @@ import java.util.List;
  * @author danie
  */
 public interface EstadisticaNotaPromPorNivel extends JpaRepository<Estadistica_Nivel, Integer> {
-    
+
     /*Agrupa por nivel(nombre_Nivel) y obtiene la nota promedio de el ultimo registro de cada nivel y devuelve (nombre_Nivel y nota_Nivel).*/
     @Query("""          
     SELECT new com.utp.TPCursoIntegrador.market.domain.dto.Estadistica_Nota_Prom_Nivel_DTO(

@@ -45,4 +45,14 @@ public class Respuestas {
     public void setPregunta(Preguntas pregunta) {
         this.pregunta = pregunta;
     }
+
+    @Override
+    public String toString() {
+        return "Respuestas{" +
+                "idRespuesta=" + idRespuesta +
+                ", texto='" + texto + '\'' +
+                ", esCorrecta=" + esCorrecta +
+                ", pregunta=" + pregunta +
+                '}';
+    }
 }

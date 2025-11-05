@@ -23,5 +23,5 @@ public class AccionService {
     public List<Accion> obtenerAcciones() {
         return listaRepository.findAll(); /*Devuelve una lista de acciones. Instancia por cada registro encontrado un Accion con sus valores y crea una lista con todos los Accion creados y la devuelve*/
     }
-;
+    ;
 }
