@@ -1,0 +1,51 @@
+/* Contenedor centrado */
+.container {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Título */
+h2 {
+  color: #4e73df;  /* azul del admin */
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Tabla principal */
+.table {
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Encabezado */
+.table-dark, .table thead th {
+  background-color: #4e73df;  /* azul admin */
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  text-align: center;
+}
+
+/* Filas */
+.table tbody td {
+  background-color: #f8f9fc; /* fondo claro */
+  text-align: center;
+  padding: 12px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+/* Filas impares */
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #e9ecef; /* azul claro suave */
+}
+
+/* Hover */
+.table tbody tr:hover td {
+  background-color: #d1d9f7; /* azul más suave al pasar el mouse */
+}

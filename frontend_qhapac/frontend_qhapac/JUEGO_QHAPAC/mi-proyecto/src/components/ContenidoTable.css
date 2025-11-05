@@ -1,0 +1,38 @@
+.tablas-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin-top: 40px;
+  font-family: "Poppins", sans-serif;
+}
+
+.tabla {
+  width: 80%;              /* muy ancha */
+  border-collapse: collapse;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tabla th {
+  background-color: #4e73df;
+  color: white;
+  font-size: 1.2rem;
+  padding: 12px;
+}
+
+.tabla td {
+  background-color: #f8f9fc;
+  padding: 15px;
+  font-size: 1.1rem;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+/* 🎆 Efecto al pasar el cursor */
+.tabla td:hover {
+  background-color: #4e73df;
+  color: white;
+}
