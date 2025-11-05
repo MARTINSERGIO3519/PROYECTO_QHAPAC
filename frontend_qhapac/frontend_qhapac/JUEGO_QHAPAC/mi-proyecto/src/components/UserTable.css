@@ -1,0 +1,84 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  font-family: "Poppins", sans-serif;
+}
+
+.dashboard-container h1 {
+  color: #e60000; /* título rojo como la tabla */
+  font-size: 2rem;
+  margin-bottom: 25px;
+}
+
+/* Contenedor de la tabla */
+.tabla-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+
+.tabla {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-out;
+}
+
+.tabla th,
+.tabla td {
+  padding: 15px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 16px;
+}
+
+.tabla th {
+  background-color: #e60000; /* rojo como UserTable */
+  color: white;
+  font-weight: bold;
+}
+
+.tabla tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.tabla tr:hover {
+  background-color: #f0e0e0;
+  cursor: pointer;
+}
+
+/* Animación de fade in */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Botón centrado */
+.btn-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.btn-success {
+  background-color: #e60000 !important; /* rojo */
+  border: none !important;
+  color: white !important;
+  padding: 12px 25px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-success:hover {
+  background-color: #b40000 !important;
+  transform: scale(1.05);
+}

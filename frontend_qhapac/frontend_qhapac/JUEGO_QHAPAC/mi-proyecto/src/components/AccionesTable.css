@@ -1,0 +1,76 @@
+.tabla-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  font-family: "Poppins", sans-serif;
+}
+
+.tabla-container h2 {
+  color: #4e73df;
+  margin-bottom: 20px;
+}
+
+.tabla {
+  width: 90%;                /* tabla bien ancha */
+  border-collapse: collapse;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tabla th {
+  background-color: #4e73df;
+  color: white;
+  padding: 14px;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.tabla td {
+  background-color: #f8f9fc;
+  text-align: center;
+  padding: 12px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+/* 🔹 Formulario */
+.form-busqueda {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.form-busqueda input {
+  padding: 10px;
+  border: 2px solid #4e73df;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 200px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.form-busqueda input:focus {
+  box-shadow: 0 0 10px rgba(78, 115, 223, 0.4);
+}
+
+.form-busqueda button {
+  background-color: #4e73df;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form-busqueda button:hover {
+  background-color: #2e59d9;
+  transform: scale(1.05);
+}
