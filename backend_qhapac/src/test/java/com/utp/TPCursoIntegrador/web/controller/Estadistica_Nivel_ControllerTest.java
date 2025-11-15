@@ -1,8 +1,6 @@
 package com.utp.TPCursoIntegrador.web.controller;
 
 import com.utp.TPCursoIntegrador.market.domain.dto.Estadistica_Nota_Prom_Nivel_DTO;
-import com.utp.TPCursoIntegrador.market.domain.service.EstadisticaNotaPorNivelService;
-import com.utp.TPCursoIntegrador.market.web.controller.Estadistica_Nivel_Controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

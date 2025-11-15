@@ -1,4 +1,8 @@
 package com.utp.TPCursoIntegrador.market.domain.repository;
 
-public interface EstadisticaPeriodoRepository {
+import com.utp.TPCursoIntegrador.market.persistence.entity.EstadisticaPeriodo;
+import org.springframework.data.repository.CrudRepository;
+
+public interface EstadisticaPeriodoRepository extends CrudRepository<EstadisticaPeriodo, Long> {
+    // Consultas personalizadas si es necesario
 }

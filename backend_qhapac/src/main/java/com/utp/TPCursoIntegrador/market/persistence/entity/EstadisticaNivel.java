@@ -1,38 +1,38 @@
 package com.utp.TPCursoIntegrador.market.persistence.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name= "estadistica_nivel")
-public class Estadistica_Nivel {
+@Table(name = "Estadistica_Nivel")
+public class EstadisticaNivel {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer id_Estadistica_Nivel;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_Estadistica_Nivel")
+    private Integer idEstadisticaNivel;
 
     @ManyToOne
-    @JoinColumn(name= "id_Nivel")
+    @JoinColumn(name = "id_Nivel", nullable = false)
     private Nivel nivel;
 
-    private int nota_Promedio;
+    @Column(name = "nota_Promedio", nullable = false)
+    private Byte notaPromedio;   // TINYINT → Byte en Java
 
+    @Column(name = "fecha", nullable = false)
     private LocalDate fecha;
 
-    private int partidas_Jugadas;
+    @Column(name = "partidas_Jugadas", nullable = false)
+    private Integer partidasJugadas;
 
-    public Integer getId_Estadistica_Nivel() {
-        return id_Estadistica_Nivel;
+    // ----- Getters & Setters -----
+
+    public Integer getIdEstadisticaNivel() {
+        return idEstadisticaNivel;
     }
 
-    public void setId_Estadistica_Nivel(Integer id_Estadistica_Nivel) {
-        this.id_Estadistica_Nivel = id_Estadistica_Nivel;
+    public void setIdEstadisticaNivel(Integer idEstadisticaNivel) {
+        this.idEstadisticaNivel = idEstadisticaNivel;
     }
 
     public Nivel getNivel() {
@@ -43,12 +43,12 @@ public class Estadistica_Nivel {
         this.nivel = nivel;
     }
 
-    public int getNota_Promedio() {
-        return nota_Promedio;
+    public Byte getNotaPromedio() {
+        return notaPromedio;
     }
 
-    public void setNota_Promedio(int nota_Promedio) {
-        this.nota_Promedio = nota_Promedio;
+    public void setNotaPromedio(Byte notaPromedio) {
+        this.notaPromedio = notaPromedio;
     }
 
     public LocalDate getFecha() {
@@ -59,22 +59,11 @@ public class Estadistica_Nivel {
         this.fecha = fecha;
     }
 
-    public int getPartidas_Jugadas() {
-        return partidas_Jugadas;
+    public Integer getPartidasJugadas() {
+        return partidasJugadas;
     }
 
-    public void setPartidas_Jugadas(int partidas_Jugadas) {
-        this.partidas_Jugadas = partidas_Jugadas;
-    }
-
-    @Override
-    public String toString() {
-        return "Estadistica_Nivel{" +
-                "id_Estadistica_Nivel=" + id_Estadistica_Nivel +
-                ", nivel=" + nivel +
-                ", nota_Promedio=" + nota_Promedio +
-                ", fecha=" + fecha +
-                ", partidas_Jugadas=" + partidas_Jugadas +
-                '}';
+    public void setPartidasJugadas(Integer partidasJugadas) {
+        this.partidasJugadas = partidasJugadas;
     }
 }

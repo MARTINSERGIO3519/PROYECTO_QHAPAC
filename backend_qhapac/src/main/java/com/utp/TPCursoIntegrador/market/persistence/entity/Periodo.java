@@ -1,52 +1,34 @@
 package com.utp.TPCursoIntegrador.market.persistence.entity;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "periodo")
+@Table(name = "Periodo")
 public class Periodo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_Periodo;
+    @Column(name = "id_Periodo")
+    private Integer idPeriodo;
 
-    private String nombre_Periodo;
+    @Column(name = "nombre_Periodo", length = 50, nullable = false)
+    private String nombrePeriodo;
 
-    @OneToMany(mappedBy="periodo")
-    private List<Nivel> nivel;
+    // ----- Getters & Setters -----
 
-    // Getter y Setter para id_Periodo
-    public Integer getId_Periodo() {
-        return id_Periodo;
+    public Integer getIdPeriodo() {
+        return idPeriodo;
     }
 
-    public void setId_Periodo(Integer id_Periodo) {
-        this.id_Periodo = id_Periodo;
+    public void setIdPeriodo(Integer idPeriodo) {
+        this.idPeriodo = idPeriodo;
     }
 
-    // Getter y Setter para nombre_Periodo
-    public String getNombre_Periodo() {
-        return nombre_Periodo;
+    public String getNombrePeriodo() {
+        return nombrePeriodo;
     }
 
-    public void setNombre_Periodo(String nombre_Periodo) {
-        this.nombre_Periodo = nombre_Periodo;
-    }
-
-    // Getter y Setter para la lista de Niveles
-    public List<Nivel> getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(List<Nivel> nivel) {
-        this.nivel = nivel;
-    }
-
-    @Override
-    public String toString() {
-        return "Periodo{" +
-                "id_Periodo=" + id_Periodo +
-                ", nombre_Periodo='" + nombre_Periodo + '\'' +
-                '}';
+    public void setNombrePeriodo(String nombrePeriodo) {
+        this.nombrePeriodo = nombrePeriodo;
     }
 }

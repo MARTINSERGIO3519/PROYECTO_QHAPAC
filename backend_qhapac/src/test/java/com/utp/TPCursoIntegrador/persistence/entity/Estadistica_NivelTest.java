@@ -1,6 +1,6 @@
 package com.utp.TPCursoIntegrador.persistence.entity;
 
-import com.utp.TPCursoIntegrador.market.persistence.entity.Estadistica_Nivel;
+import com.utp.TPCursoIntegrador.market.persistence.entity.EstadisticaNivel;
 import com.utp.TPCursoIntegrador.market.persistence.entity.Nivel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Estadistica_NivelTest {
 
-    private Estadistica_Nivel estadisticaNivel;
+    private EstadisticaNivel estadisticaNivel;
     private Nivel nivel;
 
     @BeforeEach
@@ -23,7 +23,7 @@ class Estadistica_NivelTest {
         nivel.setDesripcion_Nivel("Descripción del Nivel 1");
 
         // Inicializamos la entidad Estadistica_Nivel
-        estadisticaNivel = new Estadistica_Nivel();
+        estadisticaNivel = new EstadisticaNivel();
         estadisticaNivel.setId_Estadistica_Nivel(1);
         estadisticaNivel.setNivel(nivel);  // Asociamos el nivel
         estadisticaNivel.setNota_Promedio(85);
