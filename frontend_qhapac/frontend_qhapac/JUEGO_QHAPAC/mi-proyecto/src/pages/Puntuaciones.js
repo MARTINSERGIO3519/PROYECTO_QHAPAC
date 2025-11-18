@@ -1,57 +1,67 @@
-import React, { useEffect, useState } from "react"; 
-import axios from "axios";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// src/components/Puntuaciones.js
+import { useEffect, useState } from "react";
 import "./Puntuaciones.css";
 
-function App() {
+const Puntuaciones = () => {
   const [estadisticas, setEstadisticas] = useState([]);
 
-  const fetchEstadisticas = () => {
-    axios.get("http://localhost:8090/estadisticas/ranking")
-      .then(res => setEstadisticas(res.data))
-      .catch(err => console.log(err));
+  // ------------------------------------------------
+  // Cargar tabla completa desde backend
+  // ------------------------------------------------
+  const cargarTabla = async () => {
+    try {
+      const res = await fetch("http://localhost:8090/api/estadistica-nivel");
+      const json = await res.json();
+
+      setEstadisticas(json);
+    } catch (error) {
+      console.error("Error cargando tabla:", error);
+    }
   };
 
   useEffect(() => {
-    fetchEstadisticas(); // carga inicial
+    cargarTabla();
 
-    const interval = setInterval(() => {
-      fetchEstadisticas(); // refresca cada 5 segundos
-    }, 5000);
-
-    return () => clearInterval(interval); // limpieza al desmontar
+    // Opcional: refrescar cada 5 segundos para ver nuevos resultados
+    const interval = setInterval(cargarTabla, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="container mt-5">
-      <h2 className="mb-4 text-center">Ranking de Estadísticas</h2>
-      <table className="table table-striped table-bordered">
-        <thead className="table-dark">
-          <tr>
-            <th>Puesto</th>
-            <th>Usuario</th>
-            <th>Promedio Puntaje</th>
-            <th>Preguntas Acertadas</th>
-            <th>Preguntas Falladas</th>
-            <th>Partidas Jugadas</th>
+    <div className="p-6">
+      <h2 className="text-2xl font-semibold mb-3">Tabla de Puntuaciones</h2>
+
+      <table className="w-full border-collapse shadow">
+        <thead>
+          <tr className="bg-gray-200 text-left">
+            <th className="border p-2">Nivel</th>
+            <th className="border p-2">Nota</th>
+            <th className="border p-2">Fecha</th>
+            <th className="border p-2">Partidas</th>
           </tr>
         </thead>
+
         <tbody>
-          {estadisticas.map((item, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{item.nombreUsuario}</td>
-              <td>{item.promedioPuntaje?.toFixed(2)}</td>
-              <td>{item.preguntasAcertadas}</td>
-              <td>{item.preguntasFalladas}</td>
-              <td>{item.partidasJugadas}</td>
+          {estadisticas.length === 0 ? (
+            <tr>
+              <td colSpan="5" className="text-center p-4">
+                No hay puntuaciones registradas.
+              </td>
             </tr>
-          ))}
+          ) : (
+            estadisticas.map((item) => (
+              <tr key={item.idEstadisticaNivel} className="hover:bg-gray-100">
+                <td className="border p-2">{item.nivel?.idNivel}</td>
+                <td className="border p-2">{item.notaPromedio}</td>
+                <td className="border p-2">{item.fecha}</td>
+                <td className="border p-2">{item.partidasJugadas}</td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
   );
-}
+};
 
-export default App;
-
+export default Puntuaciones;

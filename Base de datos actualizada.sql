@@ -198,6 +198,7 @@ CREATE TABLE Pregunta (
 CREATE TABLE Respuesta (
 	id_Respuesta INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	id_Pregunta INT NOT NULL,
+    texto_Respuesta VARCHAR(200) NOT NULL,
 	es_Correcta BOOLEAN NOT NULL,
 	CONSTRAINT FK_Pregunta_Respuesta FOREIGN KEY (id_Pregunta) REFERENCES Pregunta(id_Pregunta)
 );
@@ -219,4 +220,33 @@ INSERT INTO Permiso (id_Permiso, nombre_Permiso) VALUES
 (2, 'EDITAR_USUARIO'),
 (3, 'ELIMINAR_USUARIO');
 
+-- Insertar periodos por separado y guardar sus IDs
+INSERT INTO Periodo (nombre_Periodo) VALUES ('Culturas Preincaicas');
+SET @id_periodo1 := LAST_INSERT_ID();
 
+INSERT INTO Periodo (nombre_Periodo) VALUES ('Culturas Incas');
+SET @id_periodo2 := LAST_INSERT_ID();
+
+-- Insertar niveles correspondientes a cada periodo
+INSERT INTO Nivel (nombre_Nivel, descripcion_Nivel, id_Periodo)
+VALUES 
+('Nivel 1', 'Cultura Caral', @id_periodo1),
+('Nivel 2', 'Cultura Chavin', @id_periodo1);
+
+INSERT INTO Nivel (nombre_Nivel, descripcion_Nivel, id_Periodo)
+VALUES 
+('Nivel 3', 'Inca Inicio', @id_periodo2),
+('Nivel 4', 'Inca Final', @id_periodo2);
+
+-- Insertar temas asociados a cada nivel
+INSERT INTO Tema (id_Nivel, nombre_Tema)
+VALUES 
+((SELECT id_Nivel FROM Nivel WHERE nombre_Nivel='Nivel 1'), 'Introducción a Caral'),
+((SELECT id_Nivel FROM Nivel WHERE nombre_Nivel='Nivel 2'), 'Introducción a Chavín'),
+((SELECT id_Nivel FROM Nivel WHERE nombre_Nivel='Nivel 3'), 'Introducción a los Incas'),
+((SELECT id_Nivel FROM Nivel WHERE nombre_Nivel='Nivel 4'), 'Final de los Incas');
+
+-- Guardar ID del último tema insertado si lo necesitas
+SET @tema_chavin := LAST_INSERT_ID();
+
+select*from Nivel;

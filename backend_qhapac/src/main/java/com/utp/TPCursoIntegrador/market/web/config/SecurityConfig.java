@@ -25,9 +25,15 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/auth/**",
                                 "/api/usuarios/**",
-                                "/api/admin/**",  // ← AGREGAR ESTA LÍNEA
-                                "/api/notas/**"       // ← AGREGA ESTO
-                        ).permitAll()
+                                "/api/admin/**",
+                                "/api/notas/**",
+                                "/api/periodos/**",
+                                "/api/niveles/**",
+                                "/api/temas/**",
+                                "/api/preguntas/**",
+                                "/api/respuestas/**",
+                                "/api/estadistica-nivel/**"
+                                ).permitAll()
                         .anyRequest().authenticated()
                 );
 

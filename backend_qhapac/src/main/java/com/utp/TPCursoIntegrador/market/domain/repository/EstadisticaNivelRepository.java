@@ -1,8 +1,7 @@
 package com.utp.TPCursoIntegrador.market.domain.repository;
 
 import com.utp.TPCursoIntegrador.market.persistence.entity.EstadisticaNivel;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EstadisticaNivelRepository extends CrudRepository<EstadisticaNivel, Long> {
-    // Consultas personalizadas si es necesario
+public interface EstadisticaNivelRepository extends JpaRepository<EstadisticaNivel, Integer> {
 }

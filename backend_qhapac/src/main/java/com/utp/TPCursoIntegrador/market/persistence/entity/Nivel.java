@@ -1,6 +1,9 @@
 package com.utp.TPCursoIntegrador.market.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Nivel")
@@ -20,6 +23,11 @@ public class Nivel {
     @ManyToOne
     @JoinColumn(name = "id_Periodo", nullable = false)
     private Periodo periodo;
+
+    // Un nivel tiene muchos temas
+    @JsonIgnore
+    @OneToMany(mappedBy = "nivel", cascade = CascadeType.ALL)
+    private List<Tema> tema;
 
     // ----- Getters & Setters -----
     public Integer getIdNivel() {
@@ -53,4 +61,7 @@ public class Nivel {
     public void setPeriodo(Periodo periodo) {
         this.periodo = periodo;
     }
+
+    public List<Tema> getTema() { return tema; }
+    public void setTema(List<Tema> tema) { this.tema = tema; }
 }
