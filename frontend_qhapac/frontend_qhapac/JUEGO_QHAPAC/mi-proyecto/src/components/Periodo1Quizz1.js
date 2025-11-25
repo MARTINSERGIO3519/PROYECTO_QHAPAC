@@ -5,49 +5,54 @@ import React, { useState, useEffect } from "react";
 // ===============================
 const preguntasNivel1 = [
   {
-    pregunta: "¿Dónde se desarrolló la cultura Caral?",
+    pregunta: "¿En qué fecha desembarcó José de San Martín en la bahía de Paracas?",
     opciones: [
-      "En el valle de Supe",
-      "En el valle del Mantaro",
-      "En la costa sur",
-      "En la selva central",
+      "28 de julio de 1821",
+      "8 de septiembre de 1820",
+      "9 de diciembre de 1824",
+      "1 de enero de 1820"
     ],
-    correcta: 0,
+    correcta: 1,
   },
   {
-    pregunta: "¿Qué es considerado uno de los mayores aportes de Caral?",
+    pregunta: "¿Dónde se recostó José de San Martín para descansar?",
     opciones: [
-      "El descubrimiento del hierro",
-      "La construcción de pirámides",
-      "El uso de quipus",
-      "El cultivo de papa",
+      "A la orilla del mar",
+      "Bajo una roca",
+      "A la sombra de una palmera",
+      "Dentro de una tienda militar"
     ],
     correcta: 2,
   },
   {
-    pregunta: "¿Qué antigüedad aproximada tiene Caral?",
-    opciones: ["2,000 años", "5,000 años", "500 años", "1,000 años"],
+    pregunta: "¿Qué visualizó San Martín mientras dormía?",
+    opciones: [
+      "Un ejército enemigo acercándose",
+      "Un país libre y próspero",
+      "El escudo del Perú",
+      "La firma de la independencia"
+    ],
     correcta: 1,
   },
   {
-    pregunta: "Caral es considerada:",
+    pregunta: "¿Qué aves vio San Martín al despertar?",
     opciones: [
-      "La civilización más antigua de América",
-      "La primera cultura inca",
-      "Una cultura guerrera",
-      "Una ciudad colonial antigua",
+      "Aves de alas rojas y pechos blancos",
+      "Cóndores y gaviotas",
+      "Aves con alas negras",
+      "Flamencos rosados"
     ],
     correcta: 0,
   },
   {
-    pregunta: "¿Qué tipo de sociedad tenía Caral?",
+    pregunta: "¿Qué inspiró a San Martín a crear la bandera del Perú?",
     opciones: [
-      "Militarista",
-      "Agrícola y pacífica",
-      "Conquistadora",
-      "Basada en la guerra",
+      "El mar de Paracas",
+      "La Expedición Libertadora",
+      "La bandada de aves que vio al despertar",
+      "Un sueño que tuvo en Argentina"
     ],
-    correcta: 1,
+    correcta: 2,
   },
 ];
 

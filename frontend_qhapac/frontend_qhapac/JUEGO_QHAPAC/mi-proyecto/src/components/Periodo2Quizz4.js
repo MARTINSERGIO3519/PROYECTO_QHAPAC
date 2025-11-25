@@ -1,32 +1,62 @@
 import React, { useState, useEffect } from "react";
 
 // ===============================
-//  PREGUNTAS DEL NIVEL 4 (CONQUISTA INCA)
+//  PREGUNTAS DEL NIVEL 4 
 // ===============================
 const preguntasNivel4 = [
   {
-    pregunta: "¿Quién fue el último emperador inca?",
-    opciones: ["Pachacútec", "Atahualpa", "Manco Cápac", "Túpac Amaru"],
-    correcta: 1,
-  },
-  {
-    pregunta: "¿Qué evento marcó el fin del Imperio Inca?",
-    opciones: ["Llegada de los españoles", "Guerra civil", "Muerte de Pachacútec", "Fundación de Lima"],
+    pregunta: "¿De qué país era originario Simón Bolívar?",
+    opciones: ["Venezuela", "Colombia", "Perú", "Argentina"],
     correcta: 0,
   },
   {
-    pregunta: "¿Qué conquistador capturó a Atahualpa?",
-    opciones: ["Francisco Pizarro", "Hernán Cortés", "Diego de Almagro", "Pedro de Valdivia"],
+    pregunta: "¿Qué prometió Bolívar en el Monte Sacro?",
+    opciones: [
+      "Liberar a América del yugo español",
+      "Ser presidente de Venezuela",
+      "Construir una gran ciudad",
+      "Viajar por todo el mundo",
+    ],
     correcta: 0,
   },
   {
-    pregunta: "¿Qué ciudad española se fundó tras la conquista inca?",
-    opciones: ["Lima", "Cusco", "Quito", "Arequipa"],
+    pregunta: "¿En qué año hizo Bolívar su famosa promesa?",
+    opciones: ["1805", "1810", "1815", "1820"],
     correcta: 0,
   },
   {
-    pregunta: "¿Qué resistencia inca se destacó después de la conquista?",
-    opciones: ["Manco Inca y Vilcabamba", "Atahualpa", "Pachacútec", "Túpac Yupanqui"],
+    pregunta: "¿Qué batalla consolidó la independencia de Perú?",
+    opciones: ["Ayacucho", "Junín", "Boyacá", "Carabobo"],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿Cómo se llamaba el ejército liderado por Bolívar?",
+    opciones: ["Ejército Libertador", "Ejército Unido", "Gran Colombia", "Ejército Real"],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿Qué título recibió Bolívar?",
+    opciones: ["El Libertador", "El Protector", "El Presidente", "El General"],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿En qué ciudad murió Bolívar?",
+    opciones: ["Santa Marta", "Caracas", "Bogotá", "Lima"],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿Qué países liberó Bolívar?",
+    opciones: ["Venezuela, Colombia, Ecuador, Perú", "Argentina, Chile, Perú", "México, Perú", "Brasil, Uruguay"],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿En qué año murió Bolívar?",
+    opciones: ["1830", "1825", "1840", "1850"],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿Qué idea política defendía Bolívar?",
+    opciones: ["La Gran Colombia", "El Imperio Americano", "La Monarquía", "El Comunismo"],
     correcta: 0,
   },
 ];
@@ -60,7 +90,7 @@ export default function Quizz4() {
   };
 
   const procesarResultado = async (puntajeFinal) => {
-    const nota = puntajeFinal * 4;
+    const nota = puntajeFinal * 2;
 
     if (registro) {
       if (registro.partidasJugadas >= 3) return;
@@ -142,7 +172,7 @@ export default function Quizz4() {
             <p className="mt-2 text-lg">
               Puntaje: {puntaje} / {preguntasNivel4.length}
             </p>
-            <p className="text-lg font-bold">Nota final: {puntaje * 4} / 20</p>
+            <p className="text-lg font-bold">Nota final: {puntaje * 2} / 20</p>
 
             {bloqueado && (
               <p className="text-red-500 mt-4">

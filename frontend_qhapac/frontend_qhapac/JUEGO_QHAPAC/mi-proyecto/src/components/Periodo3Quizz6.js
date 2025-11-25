@@ -1,85 +1,122 @@
 import React, { useState, useEffect } from "react";
 
 // ===============================
-//  PREGUNTAS DEL NIVEL 3 (INICIOS DEL INCA)
+//  PREGUNTAS DEL NIVEL 6 
 // ===============================
-const preguntasNivel3 = [
+const preguntasNivel6 = [
   {
-    pregunta: "¿Cómo era conocido Simón Bolívar?",
+    pregunta: "¿Quién creó la primera bandera del Perú?",
     opciones: [
-      "El Libertador",
-      "El Pacificador",
-      "El Conquistador",
-      "El Gobernador"
+      "José de San Martín",
+      "Simón Bolívar",
+      "Ramón Castilla",
+      "Miguel Grau",
+    ],
+    orrecta: 0,
+  },
+  {
+    pregunta: "¿En qué año se proclamó la independencia del Perú?",
+    opciones: ["1810", "1820", "1821", "1824"],
+    correcta: 2,
+  },
+  {
+    pregunta: "¿En qué lugar fue proclamada la independencia del Perú?",
+    opciones: [
+      "En la Plaza Mayor de Lima",
+      "En el Cusco",
+      "En Ayacucho",
+      "En Paracas",
     ],
     correcta: 0,
   },
   {
-    pregunta: "¿Qué prometió Simón Bolívar?",
+    pregunta: "¿Dónde fue izada por primera vez la bandera del Perú?",
     opciones: [
-      "Unir a España y América",
-      "Liberar toda América del Sur del dominio español",
-      "Construir un gran ejército europeo",
-      "Crear un nuevo imperio en el Caribe"
+      "En la bahía de Paracas",
+      "En la Plaza Mayor de Lima",
+      "En el Callao",
+      "En Trujillo",
     ],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿Qué simboliza el color rojo en la bandera del Perú?",
+    opciones: [
+      "La sangre de los héroes que lucharon por la independencia",
+      "La amistad entre los pueblos",
+      "La belleza de las flores peruanas",
+      "El color del cielo al amanecer",
+    ],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿Qué simboliza el color blanco en la bandera del Perú?",
+    opciones: [
+      "La pureza y la paz alcanzada tras la independencia",
+      "La nieve de los Andes",
+      "La unión con España",
+      "La riqueza del mar peruano",
+    ],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿Qué representa 'El viaje de la bandera peruana' en la historia?",
+    opciones: [
+      "El recorrido del símbolo patrio acompañando la independencia del Perú",
+      "Un desfile militar moderno",
+      "Un viaje imaginario por América",
+      "Una historia sobre el mar peruano",
+    ],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿De qué ave se inspiró San Martín para elegir los colores de la bandera?",
+    opciones: ["Del cóndor", "De las parihuanas", "Del gallito de las rocas", "Del pelícano"],
     correcta: 1,
   },
   {
-    pregunta: "¿Qué hizo Bolívar tras la retirada de San Martín?",
+    pregunta: "¿Qué representa la bandera peruana para el pueblo a lo largo de la historia?",
     opciones: [
-      "Abandonó la lucha",
-      "Tomó el mando de la lucha independentista",
-      "Se fue a Europa",
-      "Fundó un nuevo partido político"
+      "Un símbolo de identidad y unión nacional",
+      "Un mapa del territorio peruano",
+      "Un emblema religioso",
+      "Un símbolo usado solo en batallas"
     ],
-    correcta: 1,
+    correcta: 0,
   },
   {
-    pregunta: "¿Cuál era la visión de Simón Bolívar para América del Sur?",
+    pregunta: "¿Qué ha ocurrido con la bandera peruana a lo largo del tiempo?",
     opciones: [
-      "Convertirla en colonias británicas",
-      "Crear una confederación de naciones libres y unidas",
-      "Dividirla en pequeños reinos",
-      "Hacerla completamente militar"
+      "Ha tenido varias modificaciones antes de llegar al diseño actual",
+      "Siempre ha sido igual desde su creación",
+      "Cambió solo una vez durante la Guerra del Pacífico",
+      "Fue reemplazada por un símbolo distinto por muchos años"
     ],
-    correcta: 1,
-  },
-  {
-    pregunta: "¿Qué batallas fueron decisivas para cumplir su promesa de independencia?",
-    opciones: [
-      "Pichincha y Carabobo",
-      "Tarapacá y Arica",
-      "Junín y Ayacucho",
-      "Cuzco y Cajamarca"
-    ],
-    correcta: 2,
+    correcta: 0,
   },
 ];
-
+  
 // ===============================
-//     COMPONENTE NIVEL 3
+//     COMPONENTE NIVEL 4
 // ===============================
-export default function Quizz3() {
+export default function Quizz6() {
   const [actual, setActual] = useState(0);
   const [puntaje, setPuntaje] = useState(0);
   const [finalizado, setFinalizado] = useState(false);
   const [registro, setRegistro] = useState(null);
 
-  // ---------------------------------
-  //  Seleccionar respuesta del quiz
-  // ---------------------------------
   const seleccionarRespuesta = (index) => {
     if (registro && registro.partidasJugadas >= 3) return;
 
-    if (index === preguntasNivel3[actual].correcta) {
+    if (index === preguntasNivel6[actual].correcta) {
       setPuntaje(puntaje + 1);
     }
 
-    if (actual + 1 < preguntasNivel3.length) {
+    if (actual + 1 < preguntasNivel6.length) {
       setActual(actual + 1);
     } else {
       const puntajeFinal =
-        index === preguntasNivel3[actual].correcta ? puntaje + 1 : puntaje;
+        index === preguntasNivel6[actual].correcta ? puntaje + 1 : puntaje;
 
       procesarResultado(puntajeFinal);
       setPuntaje(puntajeFinal);
@@ -88,7 +125,7 @@ export default function Quizz3() {
   };
 
   const procesarResultado = async (puntajeFinal) => {
-    const nota = puntajeFinal * 4;
+    const nota = puntajeFinal * 2;
 
     if (registro) {
       if (registro.partidasJugadas >= 3) return;
@@ -96,7 +133,7 @@ export default function Quizz3() {
 
       const data = {
         idEstadisticaNivel: registro.idEstadisticaNivel,
-        nivel: { idNivel: 3 },
+        nivel: { idNivel: 6 },
         notaPromedio: nota,
         fecha: new Date().toISOString().split("T")[0],
         partidasJugadas: registro.partidasJugadas + 1,
@@ -109,7 +146,7 @@ export default function Quizz3() {
       });
     } else {
       const data = {
-        nivel: { idNivel: 3 },
+        nivel: { idNivel: 6 },
         notaPromedio: nota,
         fecha: new Date().toISOString().split("T")[0],
         partidasJugadas: 1,
@@ -127,7 +164,7 @@ export default function Quizz3() {
     const res = await fetch("http://localhost:8090/api/estadistica-nivel");
     const json = await res.json();
 
-    const existente = json.find((e) => e.nivel?.idNivel === 3);
+    const existente = json.find((e) => e.nivel?.idNivel === 6);
     setRegistro(existente || null);
   };
 
@@ -149,12 +186,12 @@ export default function Quizz3() {
         {!finalizado && !bloqueado ? (
           <>
             <h2 className="text-xl font-bold mb-4">
-              Pregunta {actual + 1} de {preguntasNivel3.length}
+              Pregunta {actual + 1} de {preguntasNivel6.length}
             </h2>
 
-            <p className="mb-4">{preguntasNivel3[actual].pregunta}</p>
+            <p className="mb-4">{preguntasNivel6[actual].pregunta}</p>
 
-            {preguntasNivel3[actual].opciones.map((op, i) => (
+            {preguntasNivel6[actual].opciones.map((op, i) => (
               <button
                 key={i}
                 className="block w-full p-3 mb-2 bg-blue-200 hover:bg-blue-300 rounded"
@@ -168,9 +205,9 @@ export default function Quizz3() {
           <div className="text-center">
             <h2 className="text-2xl font-bold">¡Quiz finalizado!</h2>
             <p className="mt-2 text-lg">
-              Puntaje: {puntaje} / {preguntasNivel3.length}
+              Puntaje: {puntaje} / {preguntasNivel6.length}
             </p>
-            <p className="text-lg font-bold">Nota final: {puntaje * 4} / 20</p>
+            <p className="text-lg font-bold">Nota final: {puntaje * 2} / 20</p>
 
             {bloqueado && (
               <p className="text-red-500 mt-4">

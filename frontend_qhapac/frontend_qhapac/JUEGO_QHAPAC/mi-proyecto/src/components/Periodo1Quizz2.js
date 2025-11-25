@@ -5,53 +5,78 @@ import React, { useState, useEffect } from "react";
 // ===============================
 const preguntasNivel2 = [
   {
-    pregunta: "¿Dónde se ubicó el centro principal de la cultura Chavín?",
+    pregunta: "¿Dónde soñó José de San Martín con la bandera del Perú?",
+    opciones: ["En Lima", "En Paracas", "En Mendoza", "En Buenos Aires"],
+    correcta: 1,
+  },
+  {
+    pregunta: "¿Qué vio San Martín en su sueño que le dio una idea para la bandera?",
     opciones: [
-      "Chavín de Huántar, en Áncash",
-      "Cusco",
-      "Chan Chan, La Libertad",
-      "Tiahuanaco"
+      "Un arcoíris",
+      "Unas aves llamadas parihuanas",
+      "Una montaña nevada",
+      "El mar azul y el cielo blanco",
+    ],
+    correcta: 1,
+  },
+  {
+    pregunta: "¿De qué colores eran las aves que inspiraron la bandera peruana?",
+    opciones: [
+      "Rojas y blancas",
+      "Verdes y amarillas",
+      "Azules y rojas",
+      "Negras y grises",
     ],
     correcta: 0,
   },
   {
-    pregunta: "¿Qué famoso monolito representa a un ser mítico de la cultura Chavín?",
+    pregunta: "¿Qué simboliza la bandera que soñó San Martín?",
     opciones: [
-      "El Lanzón Monolítico",
-      "La Estela Raimondi",
-      "El Obelisco Tello",
-      "El Fraile"
+      "La libertad del Perú",
+      "La fuerza del ejército",
+      "La amistad con España",
+      "La riqueza del país",
     ],
     correcta: 0,
   },
   {
-    pregunta: "La cultura Chavín es considerada:",
+    pregunta: "¿En qué año tuvo su sueño en Paracas?",
+    opciones: ["1810", "1815", "1820", "1825"],
+    correcta: 2,
+  },
+  {
+    pregunta: "¿Qué sintió San Martín al ver a las parihuanas volar?",
     opciones: [
-      "La cultura madre del Perú",
-      "La primera cultura costera",
-      "La cultura del altiplano",
-      "La última cultura preinca"
+      "Alegría y esperanza por la libertad",
+      "Miedo a las aves",
+      "Tristeza por el viaje",
+      "Cansancio por el calor",
     ],
     correcta: 0,
   },
   {
-    pregunta: "¿Qué técnica arquitectónica destacaba en Chavín de Huántar?",
+    pregunta: "¿Qué nombre tienen las aves del sueño de San Martín?",
+    opciones: ["Parihuanas", "Cóndores", "Gaviotas", "Flamencos"],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿Qué quería lograr San Martín con su sueño?",
     opciones: [
-      "Galerías subterráneas",
-      "Construcción de pirámides",
-      "Uso de adobe",
-      "Murallas defensivas"
+      "Liberar al Perú y traer libertad",
+      "Hacer una gran fiesta",
+      "Construir un castillo",
+      "Vender banderas",
     ],
     correcta: 0,
   },
   {
-    pregunta: "¿Qué animal aparece frecuentemente en el arte Chavín?",
-    opciones: [
-      "El jaguar u otorongo",
-      "La llama",
-      "El cóndor",
-      "El pez"
-    ],
+    pregunta: "¿Qué parte del cuerpo de las parihuanas era blanca?",
+    opciones: ["El pecho", "Las alas", "La cabeza", "Las patas"],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿Qué parte del cuerpo de las parihuanas era roja?",
+    opciones: ["Las alas", "El pico", "Las patas", "El cuello"],
     correcta: 0,
   },
 ];
@@ -91,7 +116,7 @@ export default function Quizz2() {
   //  GUARDAR O ACTUALIZAR RESULTADO
   // ---------------------------------
   const procesarResultado = async (puntajeFinal) => {
-    const nota = puntajeFinal * 4; // cada correcta vale 4 puntos (máx: 20)
+    const nota = puntajeFinal * 2; // cada correcta vale 2 puntos (máx: 20)
 
     if (registro) {
       if (registro.partidasJugadas >= 3) return;
@@ -179,7 +204,7 @@ export default function Quizz2() {
             <p className="mt-2 text-lg">
               Puntaje: {puntaje} / {preguntasNivel2.length}
             </p>
-            <p className="text-lg font-bold">Nota final: {puntaje * 4} / 20</p>
+            <p className="text-lg font-bold">Nota final: {puntaje * 2} / 20</p>
 
             {bloqueado && (
               <p className="text-red-500 mt-4">

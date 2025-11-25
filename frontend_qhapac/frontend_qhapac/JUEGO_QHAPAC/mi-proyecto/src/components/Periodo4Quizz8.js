@@ -1,85 +1,107 @@
 import React, { useState, useEffect } from "react";
 
 // ===============================
-//  PREGUNTAS DEL NIVEL 3 (INICIOS DEL INCA)
+//  PREGUNTAS DEL NIVEL 4 (CONQUISTA INCA)
 // ===============================
-const preguntasNivel3 = [
+const preguntasNivel8 = [
   {
-    pregunta: "¿Cómo era conocido Simón Bolívar?",
+    pregunta: "¿Cuántas regiones naturales tiene el Perú?",
+    opciones: ["Dos", "Tres", "Cuatro", "Cinco"],
+    correcta: 1,
+  },
+  {
+    pregunta: "¿Cuáles son las tres regiones naturales del Perú?",
     opciones: [
-      "El Libertador",
-      "El Pacificador",
-      "El Conquistador",
-      "El Gobernador"
+      "Costa, Sierra y Selva",
+      "Norte, Sur y Centro",
+      "Desierto, Mar y Bosque",
+      "Montaña, Valle y Costa",
     ],
     correcta: 0,
   },
   {
-    pregunta: "¿Qué prometió Simón Bolívar?",
+    pregunta: "¿Qué caracteriza a la región de la costa?",
     opciones: [
-      "Unir a España y América",
-      "Liberar toda América del Sur del dominio español",
-      "Construir un gran ejército europeo",
-      "Crear un nuevo imperio en el Caribe"
+      "Es una zona desértica junto al mar",
+      "Tiene grandes nevados",
+      "Está cubierta de selva y ríos",
+      "Es la región más fría del Perú",
     ],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿Cuál es el animal representativo de la sierra?",
+    opciones: ["El gallito de las rocas", "La vicuña", "El delfín rosado", "El cóndor de la selva"],
     correcta: 1,
   },
   {
-    pregunta: "¿Qué hizo Bolívar tras la retirada de San Martín?",
-    opciones: [
-      "Abandonó la lucha",
-      "Tomó el mando de la lucha independentista",
-      "Se fue a Europa",
-      "Fundó un nuevo partido político"
-    ],
-    correcta: 1,
-  },
-  {
-    pregunta: "¿Cuál era la visión de Simón Bolívar para América del Sur?",
-    opciones: [
-      "Convertirla en colonias británicas",
-      "Crear una confederación de naciones libres y unidas",
-      "Dividirla en pequeños reinos",
-      "Hacerla completamente militar"
-    ],
-    correcta: 1,
-  },
-  {
-    pregunta: "¿Qué batallas fueron decisivas para cumplir su promesa de independencia?",
-    opciones: [
-      "Pichincha y Carabobo",
-      "Tarapacá y Arica",
-      "Junín y Ayacucho",
-      "Cuzco y Cajamarca"
-    ],
+    pregunta: "¿Cuál es el animal representativo de la selva peruana?",
+    opciones: ["El cóndor", "El puma", "El gallito de las rocas", "El oso de anteojos"],
     correcta: 2,
+  },
+  {
+    pregunta: "¿Qué tipo de clima tiene la selva?",
+    opciones: [
+      "Cálido y lluvioso",
+      "Frío y seco",
+      "Ventoso y templado",
+      "Nevado todo el año",
+    ],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿Qué actividad económica es importante en la costa peruana?",
+    opciones: [
+      "La pesca y la agricultura",
+      "La minería de oro",
+      "La tala de árboles",
+      "El turismo de montaña",
+    ],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿Qué región del Perú es conocida por su gran biodiversidad?",
+    opciones: ["Costa", "Sierra", "Selva", "Altiplano"],
+    correcta: 2,
+  },
+  {
+    pregunta: "¿Qué civilización antigua se desarrolló en gran parte de la sierra?",
+    opciones: ["Los Incas", "Los Mayas", "Los Aztecas", "Los Moche"],
+    correcta: 0,
+  },
+  {
+    pregunta: "¿Qué característica distingue a la sierra peruana?",
+    opciones: [
+      "Presencia de cordilleras y altiplanos",
+      "Grandes bosques tropicales",
+      "Playas extensas",
+      "Llanuras sin montañas"
+    ],
+    correcta: 0,
   },
 ];
 
 // ===============================
-//     COMPONENTE NIVEL 3
+//     COMPONENTE NIVEL 4
 // ===============================
-export default function Quizz3() {
+export default function Quizz8() {
   const [actual, setActual] = useState(0);
   const [puntaje, setPuntaje] = useState(0);
   const [finalizado, setFinalizado] = useState(false);
   const [registro, setRegistro] = useState(null);
 
-  // ---------------------------------
-  //  Seleccionar respuesta del quiz
-  // ---------------------------------
   const seleccionarRespuesta = (index) => {
     if (registro && registro.partidasJugadas >= 3) return;
 
-    if (index === preguntasNivel3[actual].correcta) {
+    if (index === preguntasNivel8[actual].correcta) {
       setPuntaje(puntaje + 1);
     }
 
-    if (actual + 1 < preguntasNivel3.length) {
+    if (actual + 1 < preguntasNivel8.length) {
       setActual(actual + 1);
     } else {
       const puntajeFinal =
-        index === preguntasNivel3[actual].correcta ? puntaje + 1 : puntaje;
+        index === preguntasNivel8[actual].correcta ? puntaje + 1 : puntaje;
 
       procesarResultado(puntajeFinal);
       setPuntaje(puntajeFinal);
@@ -88,7 +110,7 @@ export default function Quizz3() {
   };
 
   const procesarResultado = async (puntajeFinal) => {
-    const nota = puntajeFinal * 4;
+    const nota = puntajeFinal * 2;
 
     if (registro) {
       if (registro.partidasJugadas >= 3) return;
@@ -96,7 +118,7 @@ export default function Quizz3() {
 
       const data = {
         idEstadisticaNivel: registro.idEstadisticaNivel,
-        nivel: { idNivel: 3 },
+        nivel: { idNivel: 8 },
         notaPromedio: nota,
         fecha: new Date().toISOString().split("T")[0],
         partidasJugadas: registro.partidasJugadas + 1,
@@ -109,7 +131,7 @@ export default function Quizz3() {
       });
     } else {
       const data = {
-        nivel: { idNivel: 3 },
+        nivel: { idNivel: 8 },
         notaPromedio: nota,
         fecha: new Date().toISOString().split("T")[0],
         partidasJugadas: 1,
@@ -127,7 +149,7 @@ export default function Quizz3() {
     const res = await fetch("http://localhost:8090/api/estadistica-nivel");
     const json = await res.json();
 
-    const existente = json.find((e) => e.nivel?.idNivel === 3);
+    const existente = json.find((e) => e.nivel?.idNivel === 8);
     setRegistro(existente || null);
   };
 
@@ -149,12 +171,12 @@ export default function Quizz3() {
         {!finalizado && !bloqueado ? (
           <>
             <h2 className="text-xl font-bold mb-4">
-              Pregunta {actual + 1} de {preguntasNivel3.length}
+              Pregunta {actual + 1} de {preguntasNivel8.length}
             </h2>
 
-            <p className="mb-4">{preguntasNivel3[actual].pregunta}</p>
+            <p className="mb-4">{preguntasNivel8[actual].pregunta}</p>
 
-            {preguntasNivel3[actual].opciones.map((op, i) => (
+            {preguntasNivel8[actual].opciones.map((op, i) => (
               <button
                 key={i}
                 className="block w-full p-3 mb-2 bg-blue-200 hover:bg-blue-300 rounded"
@@ -168,9 +190,9 @@ export default function Quizz3() {
           <div className="text-center">
             <h2 className="text-2xl font-bold">¡Quiz finalizado!</h2>
             <p className="mt-2 text-lg">
-              Puntaje: {puntaje} / {preguntasNivel3.length}
+              Puntaje: {puntaje} / {preguntasNivel8.length}
             </p>
-            <p className="text-lg font-bold">Nota final: {puntaje * 4} / 20</p>
+            <p className="text-lg font-bold">Nota final: {puntaje * 2} / 20</p>
 
             {bloqueado && (
               <p className="text-red-500 mt-4">

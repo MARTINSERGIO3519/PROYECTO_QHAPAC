@@ -1,85 +1,82 @@
 import React, { useState, useEffect } from "react";
 
 // ===============================
-//  PREGUNTAS DEL NIVEL 3 (INICIOS DEL INCA)
+//  PREGUNTAS DEL NIVEL 4 (CONQUISTA INCA)
 // ===============================
-const preguntasNivel3 = [
+const preguntasNivel9 = [
   {
-    pregunta: "¿Cómo era conocido Simón Bolívar?",
+    pregunta: "¿Qué sueño compartieron San Martín y Bolívar?",
     opciones: [
-      "El Libertador",
-      "El Pacificador",
-      "El Conquistador",
-      "El Gobernador"
-    ],
-    correcta: 0,
-  },
-  {
-    pregunta: "¿Qué prometió Simón Bolívar?",
-    opciones: [
-      "Unir a España y América",
-      "Liberar toda América del Sur del dominio español",
-      "Construir un gran ejército europeo",
-      "Crear un nuevo imperio en el Caribe"
+      "Unir a América con Europa",
+      "Ver a América libre y soberana",
+      "Formar un solo imperio americano",
+      "Dominar políticamente el continente"
     ],
     correcta: 1,
   },
   {
-    pregunta: "¿Qué hizo Bolívar tras la retirada de San Martín?",
+    pregunta: "¿Cómo se relacionaban las visiones de San Martín y Bolívar?",
     opciones: [
-      "Abandonó la lucha",
-      "Tomó el mando de la lucha independentista",
-      "Se fue a Europa",
-      "Fundó un nuevo partido político"
-    ],
-    correcta: 1,
-  },
-  {
-    pregunta: "¿Cuál era la visión de Simón Bolívar para América del Sur?",
-    opciones: [
-      "Convertirla en colonias británicas",
-      "Crear una confederación de naciones libres y unidas",
-      "Dividirla en pequeños reinos",
-      "Hacerla completamente militar"
-    ],
-    correcta: 1,
-  },
-  {
-    pregunta: "¿Qué batallas fueron decisivas para cumplir su promesa de independencia?",
-    opciones: [
-      "Pichincha y Carabobo",
-      "Tarapacá y Arica",
-      "Junín y Ayacucho",
-      "Cuzco y Cajamarca"
+      "Eran completamente opuestas",
+      "No tenían relación entre sí",
+      "Se complementaron para lograr la independencia",
+      "Eran idénticas en todo sentido"
     ],
     correcta: 2,
+  },
+  {
+    pregunta: "¿Qué aspecto destaca el texto sobre el período de independencia?",
+    opciones: [
+      "La competencia militar entre los libertadores",
+      "Cómo sus ideales y estrategias se entrelazaron",
+      "El apoyo de Europa en las batallas",
+      "La creación inmediata de un solo país"
+    ],
+    correcta: 1,
+  },
+  {
+    pregunta: "¿Qué lograron las acciones de San Martín y Bolívar según el texto?",
+    opciones: [
+      "La creación de un nuevo imperio español",
+      "La independencia del continente",
+      "Una alianza militar con Europa",
+      "La división permanente de América"
+    ],
+    correcta: 1,
+  },
+  {
+    pregunta: "¿Qué se menciona sobre el legado de ambos libertadores?",
+    opciones: [
+      "Se olvidó con el paso del tiempo",
+      "Solo es importante en sus países natales",
+      "No tiene relevancia actual",
+      "Perdura en la memoria histórica de los pueblos americanos"
+    ],
+    correcta: 3,
   },
 ];
 
 // ===============================
-//     COMPONENTE NIVEL 3
+//     COMPONENTE NIVEL 4
 // ===============================
-export default function Quizz3() {
+export default function Quizz9() {
   const [actual, setActual] = useState(0);
   const [puntaje, setPuntaje] = useState(0);
   const [finalizado, setFinalizado] = useState(false);
   const [registro, setRegistro] = useState(null);
 
-  // ---------------------------------
-  //  Seleccionar respuesta del quiz
-  // ---------------------------------
   const seleccionarRespuesta = (index) => {
     if (registro && registro.partidasJugadas >= 3) return;
 
-    if (index === preguntasNivel3[actual].correcta) {
+    if (index === preguntasNivel9[actual].correcta) {
       setPuntaje(puntaje + 1);
     }
 
-    if (actual + 1 < preguntasNivel3.length) {
+    if (actual + 1 < preguntasNivel9.length) {
       setActual(actual + 1);
     } else {
       const puntajeFinal =
-        index === preguntasNivel3[actual].correcta ? puntaje + 1 : puntaje;
+        index === preguntasNivel9[actual].correcta ? puntaje + 1 : puntaje;
 
       procesarResultado(puntajeFinal);
       setPuntaje(puntajeFinal);
@@ -96,7 +93,7 @@ export default function Quizz3() {
 
       const data = {
         idEstadisticaNivel: registro.idEstadisticaNivel,
-        nivel: { idNivel: 3 },
+        nivel: { idNivel: 9 },
         notaPromedio: nota,
         fecha: new Date().toISOString().split("T")[0],
         partidasJugadas: registro.partidasJugadas + 1,
@@ -109,7 +106,7 @@ export default function Quizz3() {
       });
     } else {
       const data = {
-        nivel: { idNivel: 3 },
+        nivel: { idNivel: 9 },
         notaPromedio: nota,
         fecha: new Date().toISOString().split("T")[0],
         partidasJugadas: 1,
@@ -127,7 +124,7 @@ export default function Quizz3() {
     const res = await fetch("http://localhost:8090/api/estadistica-nivel");
     const json = await res.json();
 
-    const existente = json.find((e) => e.nivel?.idNivel === 3);
+    const existente = json.find((e) => e.nivel?.idNivel === 9);
     setRegistro(existente || null);
   };
 
@@ -149,12 +146,12 @@ export default function Quizz3() {
         {!finalizado && !bloqueado ? (
           <>
             <h2 className="text-xl font-bold mb-4">
-              Pregunta {actual + 1} de {preguntasNivel3.length}
+              Pregunta {actual + 1} de {preguntasNivel9.length}
             </h2>
 
-            <p className="mb-4">{preguntasNivel3[actual].pregunta}</p>
+            <p className="mb-4">{preguntasNivel9[actual].pregunta}</p>
 
-            {preguntasNivel3[actual].opciones.map((op, i) => (
+            {preguntasNivel9[actual].opciones.map((op, i) => (
               <button
                 key={i}
                 className="block w-full p-3 mb-2 bg-blue-200 hover:bg-blue-300 rounded"
@@ -168,7 +165,7 @@ export default function Quizz3() {
           <div className="text-center">
             <h2 className="text-2xl font-bold">¡Quiz finalizado!</h2>
             <p className="mt-2 text-lg">
-              Puntaje: {puntaje} / {preguntasNivel3.length}
+              Puntaje: {puntaje} / {preguntasNivel9.length}
             </p>
             <p className="text-lg font-bold">Nota final: {puntaje * 4} / 20</p>
 

@@ -21,20 +21,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
-                        // Permitir acceso público a estos endpoints
-                        .requestMatchers(
-                                "/api/auth/**",
-                                "/api/usuarios/**",
-                                "/api/admin/**",
-                                "/api/notas/**",
-                                "/api/periodos/**",
-                                "/api/niveles/**",
-                                "/api/temas/**",
-                                "/api/preguntas/**",
-                                "/api/respuestas/**",
-                                "/api/estadistica-nivel/**"
-                                ).permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 );
 
         return http.build();

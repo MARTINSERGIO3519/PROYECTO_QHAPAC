@@ -1,85 +1,82 @@
 import React, { useState, useEffect } from "react";
 
 // ===============================
-//  PREGUNTAS DEL NIVEL 3 (INICIOS DEL INCA)
+//  PREGUNTAS DEL NIVEL 4 (CONQUISTA INCA)
 // ===============================
-const preguntasNivel3 = [
+const preguntasNivel5 = [
   {
-    pregunta: "¿Cómo era conocido Simón Bolívar?",
+    pregunta: "¿Quién creó la primera versión de la bandera peruana?",
     opciones: [
-      "El Libertador",
-      "El Pacificador",
-      "El Conquistador",
-      "El Gobernador"
-    ],
-    correcta: 0,
-  },
-  {
-    pregunta: "¿Qué prometió Simón Bolívar?",
-    opciones: [
-      "Unir a España y América",
-      "Liberar toda América del Sur del dominio español",
-      "Construir un gran ejército europeo",
-      "Crear un nuevo imperio en el Caribe"
+      "Simón Bolívar",
+      "José de San Martín",
+      "Miguel Grau",
+      "Francisco Bolognesi"
     ],
     correcta: 1,
   },
   {
-    pregunta: "¿Qué hizo Bolívar tras la retirada de San Martín?",
+    pregunta: "¿En qué se inspiraron los colores rojo y blanco de la bandera peruana?",
     opciones: [
-      "Abandonó la lucha",
-      "Tomó el mando de la lucha independentista",
-      "Se fue a Europa",
-      "Fundó un nuevo partido político"
-    ],
-    correcta: 1,
-  },
-  {
-    pregunta: "¿Cuál era la visión de Simón Bolívar para América del Sur?",
-    opciones: [
-      "Convertirla en colonias británicas",
-      "Crear una confederación de naciones libres y unidas",
-      "Dividirla en pequeños reinos",
-      "Hacerla completamente militar"
-    ],
-    correcta: 1,
-  },
-  {
-    pregunta: "¿Qué batallas fueron decisivas para cumplir su promesa de independencia?",
-    opciones: [
-      "Pichincha y Carabobo",
-      "Tarapacá y Arica",
-      "Junín y Ayacucho",
-      "Cuzco y Cajamarca"
+      "En una montaña nevada",
+      "En el cielo y el mar",
+      "En las parihuanas",
+      "En un escudo antiguo"
     ],
     correcta: 2,
+  },
+  {
+    pregunta: "¿Qué ocurrió con la bandera peruana después de su creación?",
+    opciones: [
+      "Se mantuvo igual desde el inicio",
+      "Pasó por varias modificaciones",
+      "Fue reemplazada por otra bandera",
+      "No se usó durante muchos años"
+    ],
+    correcta: 1,
+  },
+  {
+    pregunta: "¿En qué momentos históricos ha ondeado la bandera peruana?",
+    opciones: [
+      "Solo en desfiles escolares",
+      "Solo en celebraciones deportivas",
+      "En batallas históricas y ceremonias oficiales",
+      "Solo en eventos religiosos"
+    ],
+    correcta: 2,
+  },
+  {
+    pregunta: "¿Qué representa la bandera peruana para el pueblo?",
+    opciones: [
+      "La identidad del pueblo peruano",
+      "La historia de España",
+      "La cultura europea",
+      "El clima del país"
+    ],
+    correcta: 0,
   },
 ];
 
 // ===============================
-//     COMPONENTE NIVEL 3
+//     COMPONENTE NIVEL 4
 // ===============================
-export default function Quizz3() {
+export default function Quizz5() {
   const [actual, setActual] = useState(0);
   const [puntaje, setPuntaje] = useState(0);
   const [finalizado, setFinalizado] = useState(false);
   const [registro, setRegistro] = useState(null);
 
-  // ---------------------------------
-  //  Seleccionar respuesta del quiz
-  // ---------------------------------
   const seleccionarRespuesta = (index) => {
     if (registro && registro.partidasJugadas >= 3) return;
 
-    if (index === preguntasNivel3[actual].correcta) {
+    if (index === preguntasNivel5[actual].correcta) {
       setPuntaje(puntaje + 1);
     }
 
-    if (actual + 1 < preguntasNivel3.length) {
+    if (actual + 1 < preguntasNivel5.length) {
       setActual(actual + 1);
     } else {
       const puntajeFinal =
-        index === preguntasNivel3[actual].correcta ? puntaje + 1 : puntaje;
+        index === preguntasNivel5[actual].correcta ? puntaje + 1 : puntaje;
 
       procesarResultado(puntajeFinal);
       setPuntaje(puntajeFinal);
@@ -96,7 +93,7 @@ export default function Quizz3() {
 
       const data = {
         idEstadisticaNivel: registro.idEstadisticaNivel,
-        nivel: { idNivel: 3 },
+        nivel: { idNivel: 5 },
         notaPromedio: nota,
         fecha: new Date().toISOString().split("T")[0],
         partidasJugadas: registro.partidasJugadas + 1,
@@ -109,7 +106,7 @@ export default function Quizz3() {
       });
     } else {
       const data = {
-        nivel: { idNivel: 3 },
+        nivel: { idNivel: 5 },
         notaPromedio: nota,
         fecha: new Date().toISOString().split("T")[0],
         partidasJugadas: 1,
@@ -127,7 +124,7 @@ export default function Quizz3() {
     const res = await fetch("http://localhost:8090/api/estadistica-nivel");
     const json = await res.json();
 
-    const existente = json.find((e) => e.nivel?.idNivel === 3);
+    const existente = json.find((e) => e.nivel?.idNivel === 5);
     setRegistro(existente || null);
   };
 
@@ -149,12 +146,12 @@ export default function Quizz3() {
         {!finalizado && !bloqueado ? (
           <>
             <h2 className="text-xl font-bold mb-4">
-              Pregunta {actual + 1} de {preguntasNivel3.length}
+              Pregunta {actual + 1} de {preguntasNivel5.length}
             </h2>
 
-            <p className="mb-4">{preguntasNivel3[actual].pregunta}</p>
+            <p className="mb-4">{preguntasNivel5[actual].pregunta}</p>
 
-            {preguntasNivel3[actual].opciones.map((op, i) => (
+            {preguntasNivel5[actual].opciones.map((op, i) => (
               <button
                 key={i}
                 className="block w-full p-3 mb-2 bg-blue-200 hover:bg-blue-300 rounded"
@@ -168,7 +165,7 @@ export default function Quizz3() {
           <div className="text-center">
             <h2 className="text-2xl font-bold">¡Quiz finalizado!</h2>
             <p className="mt-2 text-lg">
-              Puntaje: {puntaje} / {preguntasNivel3.length}
+              Puntaje: {puntaje} / {preguntasNivel5.length}
             </p>
             <p className="text-lg font-bold">Nota final: {puntaje * 4} / 20</p>
 
