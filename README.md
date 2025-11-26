@@ -14,7 +14,7 @@ El proyecto está construido con un backend robusto en **Spring Boot**, que se e
 - **Base de datos:** MySQL  
 - **Herramientas de desarrollo:** IntelliJ IDEA, MySQL Workbench, Node.js, npm
 
-## Capturas de pantalla
+## Capturas de pantalla 
 * Menu de login
 <img width="1904" height="906" alt="image" src="https://github.com/user-attachments/assets/887b93c9-bbd9-4d4a-8952-49b3114f454f" />
 
