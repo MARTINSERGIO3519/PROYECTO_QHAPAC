@@ -1,0 +1,104 @@
+.contact-container {
+  width: 95%;
+  margin: 30px auto;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+h2 {
+  color: #004aad;
+  margin-bottom: 15px;
+}
+
+.contact-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f9f9ff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 74, 173, 0.2);
+}
+
+.contact-table th {
+  background-color: #4e73df;
+  color: white;
+  padding: 12px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.contact-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contact-table tr:hover td {
+  background-color: #cce0ff;
+  color: #002b66;
+}
+
+.abrir-btn {
+  background-color: #004aad;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.abrir-btn:hover {
+  background-color: #003080;
+}
+
+/* ==== MODAL ==== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 350px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content h3 {
+  color: #004aad;
+  margin-bottom: 10px;
+}
+
+.modal-content p {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.cerrar-btn {
+  background-color: #004aad;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.cerrar-btn:hover {
+  background-color: #003080;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}

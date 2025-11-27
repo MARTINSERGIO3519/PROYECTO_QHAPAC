@@ -1,0 +1,158 @@
+/* -------------------------
+   Variables y temas
+   ------------------------- */
+
+/* Variables por defecto (modo claro) */
+:root {
+    --overlay-light: rgba(255,255,255,0.25);
+    --overlay-dark: rgba(0,0,0,0.55);
+    --overlay: var(--overlay-light);
+
+    --text-color: #222222;
+    --muted-color: #555555;
+    --btn-bg: rgba(255,255,255,0.9);
+    --btn-color: #222222;
+    --faq-bg: rgba(255,255,255,0.95);
+    --nav-bg: rgba(255,255,255,0.9);
+    --color-sombra-video: rgba(0,0,0,0.3);
+
+    /* --bg-img debe estar definido en tu CSS global o en :root (ej. --bg-img: url('/img/bg.jpg')) */
+}
+
+/* Variables cuando existe la clase en html o body */
+html.dark-mode,
+body.dark-mode {
+    --overlay: var(--overlay-dark);
+
+    --text-color: #f1f1f1;
+    --muted-color: #cfcfcf;
+    --btn-bg: rgba(30,30,30,0.85);
+    --btn-color: #f1f1f1;
+    --faq-bg: rgba(20,20,20,0.9);
+    --nav-bg: rgba(10,10,10,0.6);
+    --color-sombra-video: rgba(255,255,255,0.12);
+}
+
+/* -------------------------
+   Fondo y color base
+   ------------------------- */
+body {
+    /* conserva tu var(--bg-img) existente; añadimos overlay para mejorar contraste */
+    background: linear-gradient(var(--overlay), var(--overlay)), var(--bg-img) no-repeat center/cover;
+    color: var(--text-color);
+    transition: background 0.25s ease, color 0.25s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* También asegurar que el wrapper principal herede color */
+.tutorial-page {
+    color: var(--text-color);
+}
+
+/* -------------------------
+   Video
+   ------------------------- */
+.video-container {
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem auto;
+    max-width: 1200px;
+    width: 90%;
+    aspect-ratio: 16/9;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--color-sombra-video);
+}
+
+/* -------------------------
+   Botones flotantes
+   ------------------------- */
+.sticky-buttons {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 9999;
+}
+
+.sticky-buttons .btn {
+    background: var(--btn-bg);
+    color: var(--btn-color);
+    border: none;
+    padding: 0.6rem 0.9rem;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+    transition: background 0.25s ease, color 0.25s ease, opacity 0.2s ease;
+}
+
+.sticky-buttons .btn:hover {
+    opacity: 0.85;
+}
+
+/* -------------------------
+   FAQ
+   ------------------------- */
+.faq {
+    position: fixed;
+    bottom: 4rem;
+    right: 1rem;
+    background: var(--faq-bg);
+    color: var(--text-color);
+    border-radius: 12px;
+    padding: 1rem;
+    width: 300px;
+    max-width: 90%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 9998;
+}
+
+.faq.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+}
+
+/* Ajustes de texto interior */
+.faq h3 {
+    margin-top: 0;
+    color: var(--text-color);
+}
+.faq ul { margin: 0.5rem 0 0 1rem; color: var(--muted-color); }
+
+/* -------------------------
+   Forzar contraste en la navbar y elementos comunes
+   (si tu navbar usa clases personalizadas, mantenlas; esto es genérico)
+   ------------------------- */
+header, .navbar, nav, .nav, .nav-link, .logo, .titulo, .App-header {
+    color: var(--text-color) !important;
+    background-color: transparent !important; /* evita fondos negros inesperados */
+}
+
+/* Forzar color en enlaces y textos comunes (reduce casos donde Comun.css tenga color fijo) */
+a, p, li, span, label, button, h1, h2, h3, h4 {
+    color: var(--text-color) !important;
+}
+
+/* Si usas botones con clases, herédalas */
+button, .btn {
+    background: var(--btn-bg) !important;
+    color: var(--btn-color) !important;
+}
+
+/* pequeños detalles */
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+
