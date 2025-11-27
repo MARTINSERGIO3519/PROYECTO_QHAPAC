@@ -1,0 +1,49 @@
+/* Fondo y diseño del Dashboard */
+.dashboard-container {
+  background-color: #f2d4d4; /* Fondo rojo suave */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Título del Dashboard */
+.dashboard-container h1 {
+  font-size: 2.5rem;
+  color: #800000; /* Color rojo oscuro */
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Botón de descarga */
+.dashboard-container .btn-success {
+  background-color: #e60000; /* Rojo intenso */
+  border-color: #cc0000;
+  color: rgb(0, 0, 0); /* Color del texto en blanco */
+  font-size: 18px; /* Ajustar tamaño de la fuente */
+  font-weight: 600;
+  padding: 20px 160px; /* Reducir padding para un tamaño más manejable */
+  border-radius: 5px;
+  text-transform: uppercase;
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dashboard-container .btn-success:hover {
+  background-color: #c20000;
+  border-color: #a30000;
+  cursor: pointer;
+}
+
+.dashboard-container .btn-success:active {
+  transform: translateY(2px); /* Efecto de presión en el botón */
+}
+
+/* Para alinear el botón al centro */
+.dashboard-container .text-center {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center; /* Centra el botón horizontalmente */
+  align-items: center; /* Centra el botón verticalmente si es necesario */
+  width: 100%;
+}
