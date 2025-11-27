@@ -2,7 +2,7 @@
 export const registrarNivel = async (idNivel, puntaje, correctas) => {
   try {
     const data = {
-      idUsuario: 1, // usuario logueado
+      idUsuario: idUsuario, // usuario logueado
       idNivel: idNivel,
       puntaje: puntaje,
       correctas: correctas,
