@@ -18,4 +18,12 @@ public class CambiarEstadoRequest {
 
     public Integer getNuevoEstado() { return nuevoEstado; }
     public void setNuevoEstado(Integer nuevoEstado) { this.nuevoEstado = nuevoEstado; }
+
+    @Override
+    public String toString() {
+        return "CambiarEstadoRequest{" +
+                "idUsuario=" + idUsuario +
+                ", nuevoEstado=" + nuevoEstado +
+                '}';
+    }
 }

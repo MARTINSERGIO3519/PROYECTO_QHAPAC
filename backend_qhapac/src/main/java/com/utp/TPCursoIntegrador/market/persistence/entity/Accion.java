@@ -6,10 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-/**
- *
- * @author danie
- */
 @Entity
 @Table(name="accion")
 public class Accion {
@@ -36,5 +32,11 @@ public class Accion {
         this.descripcion_Accion = descripcion_Accion;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Accion{" +
+                "id_Accion=" + id_Accion +
+                ", descripcion_Accion='" + descripcion_Accion + '\'' +
+                '}';
+    }
 }

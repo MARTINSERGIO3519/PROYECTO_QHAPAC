@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as XLSX from 'xlsx';
+import { authGet, authPost, authPut } from '../utils/api';
 import './DashboardAdmin.css';
 
 function DashboardAdmin() {
@@ -51,19 +52,23 @@ function DashboardAdmin() {
     setMensaje('');
     try {
       console.log('🔍 Cargando usuarios desde API...');
-      const response = await fetch("http://localhost:8090/api/admin/usuarios");
-      
+      const response = await authGet("http://localhost:8090/api/admin/usuarios");
+
       if (!response.ok) {
         const errorText = await response.text();
         throw new Error(`Error ${response.status}: ${errorText || 'No se pudieron cargar los usuarios'}`);
       }
-      
+
       const data = await response.json();
       setUsuarios(data);
       setMensaje(`✅ ${data.length} usuarios cargados exitosamente`);
     } catch (error) {
       console.error('❌ Error al cargar usuarios:', error);
-      setMensaje(`❌ ${error.message}`);
+      if (error.message === 'Authentication failed') {
+        setMensaje("❌ Sesión expirada. Por favor, inicia sesión nuevamente.");
+      } else {
+        setMensaje(`❌ ${error.message}`);
+      }
     } finally {
       setLoading(false);
     }
@@ -71,7 +76,7 @@ function DashboardAdmin() {
 
   const cargarEstadisticas = async () => {
     try {
-      const response = await fetch("http://localhost:8090/api/admin/estadisticas");
+      const response = await authGet("http://localhost:8090/api/admin/estadisticas");
       
       if (response.ok) {
         const data = await response.json();
@@ -88,13 +93,17 @@ function DashboardAdmin() {
       }
     } catch (error) {
       console.error('❌ Error cargando estadísticas:', error);
-      const stats = {
-        totalUsuarios: usuarios.length,
-        administradores: usuarios.filter(u => u.idRol === 1).length,
-        usuariosNormales: usuarios.filter(u => u.idRol === 2).length,
-        usuariosActivos: usuarios.filter(u => u.id_Estado_Usuario === 1).length
-      };
-      setEstadisticas(stats);
+      if (error.message === 'Authentication failed') {
+        setMensaje("❌ Sesión expirada. Por favor, inicia sesión nuevamente.");
+      } else {
+        const stats = {
+          totalUsuarios: usuarios.length,
+          administradores: usuarios.filter(u => u.idRol === 1).length,
+          usuariosNormales: usuarios.filter(u => u.idRol === 2).length,
+          usuariosActivos: usuarios.filter(u => u.id_Estado_Usuario === 1).length
+        };
+        setEstadisticas(stats);
+      }
     }
   };
 
@@ -212,7 +221,11 @@ function DashboardAdmin() {
       cerrarModal();
     } catch (error) {
       console.error('Error en confirmarAccion:', error);
-      setMensaje('❌ Error al realizar la acción');
+      if (error.message === 'Authentication failed') {
+        setMensaje("❌ Sesión expirada. Por favor, inicia sesión nuevamente.");
+      } else {
+        setMensaje('❌ Error al realizar la acción');
+      }
     } finally {
       setLoading(false);
     }
@@ -238,14 +251,7 @@ function DashboardAdmin() {
     }
 
     try {
-      const response = await fetch("http://localhost:8090/api/admin/usuarios", {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
+      const response = await authPost("http://localhost:8090/api/admin/usuarios", formData);
 
       let data;
       const responseText = await response.text();
@@ -279,7 +285,11 @@ function DashboardAdmin() {
 
     } catch (error) {
       console.error('❌ Error en crearUsuario:', error);
-      setMensaje("❌ Error de conexión con el servidor");
+      if (error.message === 'Authentication failed') {
+        setMensaje("❌ Sesión expirada. Por favor, inicia sesión nuevamente.");
+      } else {
+        setMensaje("❌ Error de conexión con el servidor");
+      }
     } finally {
       setLoading(false);
     }
@@ -289,16 +299,9 @@ function DashboardAdmin() {
     try {
       setMensaje('');
       
-      const response = await fetch("http://localhost:8090/api/admin/usuarios/cambiar-rol", {
-        method: "PUT",
-        headers: { 
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({ 
-          idUsuario: idUsuario, 
-          nuevoRol: nuevoRol 
-        })
+      const response = await authPut("http://localhost:8090/api/admin/usuarios/cambiar-rol", { 
+        idUsuario: idUsuario, 
+        nuevoRol: nuevoRol 
       });
 
       let data;
@@ -334,7 +337,11 @@ function DashboardAdmin() {
       }
     } catch (error) {
       console.error(error);
-      setMensaje("❌ Error de conexión");
+      if (error.message === 'Authentication failed') {
+        setMensaje("❌ Sesión expirada. Por favor, inicia sesión nuevamente.");
+      } else {
+        setMensaje("❌ Error de conexión");
+      }
     }
   };
 
@@ -342,16 +349,9 @@ function DashboardAdmin() {
     try {
       setMensaje('');
       
-      const response = await fetch("http://localhost:8090/api/admin/usuarios/cambiar-estado", {
-        method: "PUT",
-        headers: { 
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({ 
-          idUsuario: idUsuario, 
-          nuevoEstado: nuevoEstado 
-        })
+      const response = await authPut("http://localhost:8090/api/admin/usuarios/cambiar-estado", { 
+        idUsuario: idUsuario, 
+        nuevoEstado: nuevoEstado 
       });
 
       let data;
@@ -388,7 +388,11 @@ function DashboardAdmin() {
       }
     } catch (error) {
       console.error(error);
-      setMensaje("❌ Error de conexión");
+      if (error.message === 'Authentication failed') {
+        setMensaje("❌ Sesión expirada. Por favor, inicia sesión nuevamente.");
+      } else {
+        setMensaje("❌ Error de conexión");
+      }
     }
   };
 

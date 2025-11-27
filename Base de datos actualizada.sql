@@ -198,6 +198,7 @@ CREATE TABLE Pregunta (
 CREATE TABLE Respuesta (
 	id_Respuesta INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	id_Pregunta INT NOT NULL,
+    texto_Respuesta VARCHAR(200) NOT NULL,
 	es_Correcta BOOLEAN NOT NULL,
 	CONSTRAINT FK_Pregunta_Respuesta FOREIGN KEY (id_Pregunta) REFERENCES Pregunta(id_Pregunta)
 );
@@ -219,4 +220,60 @@ INSERT INTO Permiso (id_Permiso, nombre_Permiso) VALUES
 (2, 'EDITAR_USUARIO'),
 (3, 'ELIMINAR_USUARIO');
 
+-- Insertar periodos por separado y guardar sus IDs
+INSERT INTO Periodo (nombre_Periodo) VALUES ('EL SUEÑO DE DON JOSE DE SAN MARTIN');
+SET @id_periodo1 := LAST_INSERT_ID();
 
+INSERT INTO Periodo (nombre_Periodo) VALUES ('La promesa de Simón Bolívar');
+SET @id_periodo2 := LAST_INSERT_ID();
+
+INSERT INTO Periodo (nombre_Periodo) VALUES ('El viaje de la bandera peruana');
+SET @id_periodo3 := LAST_INSERT_ID();
+
+INSERT INTO Periodo (nombre_Periodo) VALUES ('El Perú');
+SET @id_periodo4 := LAST_INSERT_ID();
+
+INSERT INTO Periodo (nombre_Periodo) VALUES ('El sueño de los libertadores');
+SET @id_periodo5 := LAST_INSERT_ID();
+
+-- Insertar niveles correspondientes a cada periodo
+INSERT INTO Nivel (nombre_Nivel, descripcion_Nivel, id_Periodo)
+VALUES 
+('Nivel 1', 'Preguntas texto', @id_periodo1),
+('Nivel 2', 'Preguntas video', @id_periodo1);
+
+INSERT INTO Nivel (nombre_Nivel, descripcion_Nivel, id_Periodo)
+VALUES 
+('Nivel 3', 'Preguntas texto', @id_periodo2),
+('Nivel 4', 'Preguntas video', @id_periodo2);
+
+INSERT INTO Nivel (nombre_Nivel, descripcion_Nivel, id_Periodo)
+VALUES 
+('Nivel 5', 'Preguntas texto', @id_periodo3),
+('Nivel 6', 'Preguntas video', @id_periodo3);
+
+INSERT INTO Nivel (nombre_Nivel, descripcion_Nivel, id_Periodo)
+VALUES 
+('Nivel 7', 'Preguntas texto', @id_periodo4),
+('Nivel 8', 'Preguntas video', @id_periodo4);
+
+INSERT INTO Nivel (nombre_Nivel, descripcion_Nivel, id_Periodo)
+VALUES 
+('Nivel 9', 'Preguntas texto', @id_periodo5),
+('Nivel 10', 'Preguntas video', @id_periodo5);
+
+-- Insertar temas asociados a cada nivel
+INSERT INTO Tema (id_Nivel, nombre_Tema)
+VALUES 
+((SELECT id_Nivel FROM Nivel WHERE nombre_Nivel='Nivel 1'), 'Perido 1 parte 1'),
+((SELECT id_Nivel FROM Nivel WHERE nombre_Nivel='Nivel 2'), 'Perido 1 parte 2'),
+((SELECT id_Nivel FROM Nivel WHERE nombre_Nivel='Nivel 3'), 'Perido 2 parte 1'),
+((SELECT id_Nivel FROM Nivel WHERE nombre_Nivel='Nivel 4'), 'Perido 2 parte 2'),
+((SELECT id_Nivel FROM Nivel WHERE nombre_Nivel='Nivel 5'), 'Perido 3 parte 1'),
+((SELECT id_Nivel FROM Nivel WHERE nombre_Nivel='Nivel 6'), 'Perido 3 parte 2'),
+((SELECT id_Nivel FROM Nivel WHERE nombre_Nivel='Nivel 7'), 'Perido 4 parte 1'),
+((SELECT id_Nivel FROM Nivel WHERE nombre_Nivel='Nivel 8'), 'Perido 4 parte 2'),
+((SELECT id_Nivel FROM Nivel WHERE nombre_Nivel='Nivel 9'), 'Perido 5 parte 1'),
+((SELECT id_Nivel FROM Nivel WHERE nombre_Nivel='Nivel 10'), 'Perido 5 parte 2');
+
+select*from Nivel;

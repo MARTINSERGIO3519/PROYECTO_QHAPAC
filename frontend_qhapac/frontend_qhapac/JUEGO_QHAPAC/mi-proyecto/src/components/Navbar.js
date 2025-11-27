@@ -1,6 +1,9 @@
+// src/components/Navbar.js
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { forceLogout } from '../utils/authHelpers';
 import './Navbar.css';
+
 
 export default function Navbar({ usuario, cerrarSesion }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,15 +17,39 @@ export default function Navbar({ usuario, cerrarSesion }) {
   const hamburgerRef = useRef(null);
 
   useEffect(() => {
-    const usuarioGuardado = localStorage.getItem("usuario");
-    if (usuarioGuardado) {
-      try {
-        setUsuarioLocal(JSON.parse(usuarioGuardado));
-      } catch (error) {
-        console.error('Error parsing usuario:', error);
+  const usuarioGuardado = localStorage.getItem("usuario");
+  console.log("🔄 Navbar - Usuario guardado:", usuarioGuardado);
+  
+  if (usuarioGuardado) {
+    try {
+      if (usuarioGuardado === "undefined") {
+        console.warn("❌ Navbar - Usuario es 'undefined' string");
         localStorage.removeItem("usuario");
+        localStorage.removeItem("token");
+        setUsuarioLocal(null);
+        return;
       }
+      
+      const parsedUsuario = JSON.parse(usuarioGuardado);
+      console.log("✅ Navbar - Usuario parseado:", parsedUsuario);
+      
+      if (parsedUsuario && typeof parsedUsuario === 'object' && parsedUsuario.id) {
+        setUsuarioLocal(parsedUsuario);
+      } else {
+        console.warn("⚠️ Navbar - Datos de usuario inválidos");
+        localStorage.removeItem("usuario");
+        localStorage.removeItem("token");
+        setUsuarioLocal(null);
+      }
+    } catch (error) {
+      console.error('❌ Navbar - Error parsing usuario:', error);
+      localStorage.removeItem("usuario");
+      localStorage.removeItem("token");
+      setUsuarioLocal(null);
     }
+  } else {
+    setUsuarioLocal(null);
+  }
   }, [usuario]);
 
   // Cerrar menús al hacer click fuera
@@ -40,12 +67,12 @@ export default function Navbar({ usuario, cerrarSesion }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleLogout = () => {
-    cerrarSesion();
-    setIsProfileOpen(false);
-    setIsMenuOpen(false);
-    navigate("/login");
-  };
+
+  // En Navbar.js, reemplaza handleLogout:
+const handleLogout = () => {
+  console.log("🚪 Ejecutando logout desde Navbar");
+  forceLogout(); // Usar la función de logout forzado
+};
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -63,7 +90,10 @@ export default function Navbar({ usuario, cerrarSesion }) {
     setIsProfileOpen(false);
   };
 
+  // Usar el usuario de props o del localStorage
   const usuarioActual = usuario || usuarioLocal;
+  console.log("👤 Usuario actual en Navbar:", usuarioActual);
+  
   const isAdmin = usuarioActual?.idRol === 1;
 
   // Definir enlaces basados en el rol
@@ -105,11 +135,11 @@ export default function Navbar({ usuario, cerrarSesion }) {
           </Link>
           
           {/* Mensaje de bienvenida para admin */}
-          {isAdmin && (
+          {isAdmin && usuarioActual && (
             <div className="welcome-container">
               <div className="welcome-message">
                 <span className="welcome-text">¡Bienvenido!</span>
-                <span className="user-name">{usuarioActual?.nombre}</span>
+                <span className="user-name">{usuarioActual.nombre}</span>
               </div>
             </div>
           )}
@@ -164,9 +194,9 @@ export default function Navbar({ usuario, cerrarSesion }) {
                   <span className={`dropdown-arrow ${isProfileOpen ? 'open' : ''}`}>▼</span>
                 </button>
 
-                {/* Dropdown de perfil - REDISEÑADO */}
+                {/* Dropdown de perfil */}
                 <div className={`profile-dropdown ${isProfileOpen ? 'open' : ''}`}>
-                  {/* Tarjeta de información del usuario - ESTILO COHERENTE CON MÓVIL */}
+                  {/* Tarjeta de información del usuario */}
                   <div className="dropdown-user-card">
                     <div className="dropdown-user-avatar">👤</div>
                     <div className="dropdown-user-info">
@@ -178,7 +208,7 @@ export default function Navbar({ usuario, cerrarSesion }) {
                     </div>
                   </div>
                   
-                  {/* Solo Cerrar Sesión - ELIMINADO "Mi Perfil" */}
+                  {/* Solo Cerrar Sesión */}
                   <div className="dropdown-actions">
                     <button 
                       className="dropdown-action logout"

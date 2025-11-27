@@ -39,4 +39,16 @@ public class GestionUsuarioRequest {
 
     public Float getHorasSemanales() { return horasSemanales; }
     public void setHorasSemanales(Float horasSemanales) { this.horasSemanales = horasSemanales; }
+
+    @Override
+    public String toString() {
+        return "GestionUsuarioRequest{" +
+                "nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", correo='" + correo + '\'' +
+                ", contrasenia='" + contrasenia + '\'' +
+                ", idRol=" + idRol +
+                ", horasSemanales=" + horasSemanales +
+                '}';
+    }
 }

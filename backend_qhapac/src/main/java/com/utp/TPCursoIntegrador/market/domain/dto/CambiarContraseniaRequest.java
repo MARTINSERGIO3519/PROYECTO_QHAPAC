@@ -28,4 +28,13 @@ public class CambiarContraseniaRequest {
     public void setNuevaContrasenia(String nuevaContrasenia) {
         this.nuevaContrasenia = nuevaContrasenia;
     }
+
+    @Override
+    public String toString() {
+        return "CambiarContraseniaRequest{" +
+                "idUsuario=" + idUsuario +
+                ", contraseniaActual='" + contraseniaActual + '\'' +
+                ", nuevaContrasenia='" + nuevaContrasenia + '\'' +
+                '}';
+    }
 }

@@ -13,4 +13,11 @@ public class MensajeResponse {
     // Getters y Setters
     public String getMensaje() { return mensaje; }
     public void setMensaje(String mensaje) { this.mensaje = mensaje; }
+
+    @Override
+    public String toString() {
+        return "MensajeResponse{" +
+                "mensaje='" + mensaje + '\'' +
+                '}';
+    }
 }

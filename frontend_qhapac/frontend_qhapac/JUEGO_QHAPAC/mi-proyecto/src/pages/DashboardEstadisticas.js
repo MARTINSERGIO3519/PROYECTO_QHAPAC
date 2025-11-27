@@ -1,30 +1,59 @@
-// src/pages/DashboardAdmin.js
+// src/pages/DashboardEstadisticas.js
 import React, { useState, useEffect } from 'react';
 import * as XLSX from 'xlsx';
 import EstadisticaTable from '../components/EstadisticaTable';
+import { authGet } from '../utils/api';
 import './DashboardAdmin.css';
 
-export default function DashboardAdmin() {
+export default function DashboardEstadisticas() {
   const [usuarios, setUsuarios] = useState([]);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:8090/admin/get-users', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+    const cargarUsuarios = async () => {
+      try {
+        setLoading(true);
+        setError('');
+        // USAR LA RUTA CORRECTA
+        const res = await authGet('http://localhost:8090/api/admin/usuarios');
+        
+        if (!res.ok) {
+          throw new Error(`Error HTTP: ${res.status}`);
+        }
+
+        const data = await res.json();
+        const usuariosSinContrasena = data.map(({ contrasena, ...rest }) => rest);
+        setUsuarios(usuariosSinContrasena);
+      } catch (error) {
+        console.error('❌ Error cargando usuarios:', error);
+        if (error.message === 'Authentication failed') {
+          setError("Sesión expirada. Por favor, inicia sesión nuevamente.");
+        } else {
+          setError(`Error al cargar usuarios: ${error.message}`);
+        }
+      } finally {
+        setLoading(false);
       }
-    })
-    .then(response => response.json())
-    .then(data => {
-      const usuariosSinContrasena = data.map(({ contrasena, ...rest }) => rest);
-      setUsuarios(usuariosSinContrasena);
-    })
-    .catch(err => console.log('Error al obtener usuarios:', err));
+    };
+
+    cargarUsuarios();
   }, []);
 
   const downloadExcel = () => {
-    const usuariosSinContrasena = usuarios.map(({ contrasena, ...rest }) => rest);
-    const ws = XLSX.utils.json_to_sheet(usuariosSinContrasena);
+    const datosParaExcel = usuarios.map(usuario => ({
+      ID: usuario.idUsuario,
+      Nombre: usuario.nombre,
+      Apellido: usuario.apellido,
+      Email: usuario.email,
+      Rol: usuario.idRol === 1 ? '👑 Administrador' : '👤 Usuario',
+      Estado: usuario.id_Estado_Usuario === 1 ? '🟢 Activo' : 
+              usuario.id_Estado_Usuario === 2 ? '⚫ Inactivo' : '🔴 Bloqueado',
+      'Experiencia Total': usuario.experiencia_Total,
+      'Fecha Registro': new Date(usuario.fecha_Registro).toLocaleDateString()
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(datosParaExcel);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Usuarios');
     XLSX.writeFile(wb, 'usuarios.xlsx');
@@ -33,36 +62,52 @@ export default function DashboardAdmin() {
   return (
     <div className="dashboard-admin-container">
       <h1><center>Manejo de Estadísticas</center></h1>
+      
+      {error && (
+        <div className="alert alert-danger">
+          {error}
+        </div>
+      )}
+
+      {loading && (
+        <div className="text-center py-4">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Cargando...</span>
+          </div>
+          <p className="mt-2">Cargando datos...</p>
+        </div>
+      )}
+      
       <EstadisticaTable/>
       <div className="mt-4" 
-      style={{ 
-        display: "flex", 
-        flexDirection: "column", 
-        justifyContent: "center", 
-        alignItems: "center", 
-        height: "20vh", 
-        textAlign: "center" 
-      }}
-    >
-  
-  <button 
-    className="btn btn-success"
-    onClick={downloadExcel}
-    style={{ 
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      padding: "12px 35px",
-      fontSize: "18px",
-      fontWeight: "500",
-      textAlign: "center",
-      lineHeight: "1",
-      borderRadius: "8px"
-    }}
-  >
-    Descargar en Excel
-  </button>
-</div>
+        style={{ 
+          display: "flex", 
+          flexDirection: "column", 
+          justifyContent: "center", 
+          alignItems: "center", 
+          height: "20vh", 
+          textAlign: "center" 
+        }}
+      >
+        <button 
+          className="btn btn-success"
+          onClick={downloadExcel}
+          disabled={usuarios.length === 0 || loading}
+          style={{ 
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "12px 35px",
+            fontSize: "18px",
+            fontWeight: "500",
+            textAlign: "center",
+            lineHeight: "1",
+            borderRadius: "8px"
+          }}
+        >
+          Descargar en Excel
+        </button>
+      </div>
     </div>
   );
 }

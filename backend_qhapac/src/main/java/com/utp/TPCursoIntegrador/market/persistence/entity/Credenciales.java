@@ -43,4 +43,16 @@ public class Credenciales {
 
     public java.time.LocalDateTime getFechaExpiraCodigo() { return fechaExpiraCodigo; }
     public void setFechaExpiraCodigo(java.time.LocalDateTime fechaExpiraCodigo) { this.fechaExpiraCodigo = fechaExpiraCodigo; }
+
+    @Override
+    public String toString() {
+        return "Credenciales{" +
+                "idCredencial=" + idCredencial +
+                ", idUsuario=" + idUsuario +
+                ", correo='" + correo + '\'' +
+                ", contrasenia='" + contrasenia + '\'' +
+                ", codigoTemporal='" + codigoTemporal + '\'' +
+                ", fechaExpiraCodigo=" + fechaExpiraCodigo +
+                '}';
+    }
 }

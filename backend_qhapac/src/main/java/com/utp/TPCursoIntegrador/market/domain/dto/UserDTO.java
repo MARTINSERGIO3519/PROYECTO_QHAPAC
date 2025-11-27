@@ -18,4 +18,15 @@ public class UserDTO {
     public void setRol(String rol) { this.rol = rol; }
     public String getContrasena() { return contrasena;}
     public void setContrasena(String contrasena) { this.contrasena = contrasena;}
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "idUsuario=" + idUsuario +
+                ", nombre='" + nombre + '\'' +
+                ", correo='" + correo + '\'' +
+                ", rol='" + rol + '\'' +
+                ", contrasena='" + (contrasena != null ? "********" : "null") + '\'' +  // Ocultar la contraseña
+                '}';
+    }
 }

@@ -29,4 +29,14 @@ public class EstadisticasSistemaDTO {
 
     public Long getUsuariosActivos() { return usuariosActivos; }
     public void setUsuariosActivos(Long usuariosActivos) { this.usuariosActivos = usuariosActivos; }
+
+    @Override
+    public String toString() {
+        return "EstadisticasSistemaDTO{" +
+                "totalUsuarios=" + totalUsuarios +
+                ", administradores=" + administradores +
+                ", usuariosNormales=" + usuariosNormales +
+                ", usuariosActivos=" + usuariosActivos +
+                '}';
+    }
 }

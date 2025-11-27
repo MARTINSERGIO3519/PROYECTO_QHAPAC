@@ -47,4 +47,15 @@ public class EstadisticaDTO {
     public void setPartidasJugadas(Integer partidasJugadas) {
         this.partidasJugadas = partidasJugadas;
     }
+
+    @Override
+    public String toString() {
+        return "EstadisticaDTO{" +
+                "nombreUsuario='" + nombreUsuario + '\'' +
+                ", promedioPuntaje=" + promedioPuntaje +
+                ", preguntasAcertadas=" + preguntasAcertadas +
+                ", preguntasFalladas=" + preguntasFalladas +
+                ", partidasJugadas=" + partidasJugadas +
+                '}';
+    }
 }
