@@ -1,12 +1,7 @@
 package com.utp.TPCursoIntegrador.persistence.entity;
 
-<<<<<<< HEAD
-import com.utp.TPCursoIntegrador.market.persistence.entity.Preguntas;
-import com.utp.TPCursoIntegrador.market.persistence.entity.Respuestas;
-=======
 import com.utp.TPCursoIntegrador.market.persistence.entity.Pregunta;
 import com.utp.TPCursoIntegrador.market.persistence.entity.Respuesta;
->>>>>>> luis_sarmiento
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,21 +9,13 @@ class RespuestasTest {
 
     @Test
     void testGettersAndSetters() {
-<<<<<<< HEAD
-        Respuestas respuesta = new Respuestas();
-=======
         Respuesta respuesta = new Respuesta();
->>>>>>> luis_sarmiento
         respuesta.setIdRespuesta(1);
         respuesta.setTexto("Respuesta correcta");
         respuesta.setEsCorrecta(true);
 
         // Crear un objeto Preguntas para asociar
-<<<<<<< HEAD
-        Preguntas pregunta = new Preguntas();
-=======
         Pregunta pregunta = new Pregunta();
->>>>>>> luis_sarmiento
         pregunta.setIdPregunta(1); // Asignamos un ID de pregunta
         respuesta.setPregunta(pregunta);
 
@@ -42,21 +29,13 @@ class RespuestasTest {
     @Test
     void testToString() {
         // Crear una instancia de Respuestas
-<<<<<<< HEAD
-        Respuestas respuesta = new Respuestas();
-=======
         Respuesta respuesta = new Respuesta();
->>>>>>> luis_sarmiento
         respuesta.setIdRespuesta(1);
         respuesta.setTexto("Respuesta correcta");
         respuesta.setEsCorrecta(true);
 
         // Crear un objeto Preguntas para asociar
-<<<<<<< HEAD
-        Preguntas pregunta = new Preguntas();
-=======
         Pregunta pregunta = new Pregunta();
->>>>>>> luis_sarmiento
         pregunta.setIdPregunta(1); // Asignamos un ID de pregunta
         respuesta.setPregunta(pregunta);
 

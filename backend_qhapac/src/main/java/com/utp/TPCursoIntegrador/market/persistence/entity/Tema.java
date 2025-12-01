@@ -36,21 +36,6 @@ public class Tema {
     public Nivel getNivel() { return nivel; }
     public void setNivel(Nivel nivel) { this.nivel = nivel; }
 
-<<<<<<< HEAD
-    public List<Preguntas> getPreguntas() { return preguntas; }
-    public void setPreguntas(List<Preguntas> preguntas) { this.preguntas = preguntas; }
-
-    @Override
-    public String toString() {
-        return "Tema{" +
-                "idTema=" + idTema +
-                ", nombreTema='" + nombreTema + '\'' +
-                ", periodo=" + periodo +
-                '}';
-    }
-}
-=======
     public List<Pregunta> getPregunta() { return pregunta; }
     public void setPregunta(List<Pregunta> preguntas) { this.pregunta = preguntas; }
 }
->>>>>>> luis_sarmiento

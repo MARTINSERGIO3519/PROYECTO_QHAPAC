@@ -16,7 +16,7 @@ public class BackupScheduler {
     private static final String PASSWORD = "root";
     private static final String DATABASE = "QhapacDatabase";
 
-    @Scheduled(cron = "0 30 14 * * *")
+    @Scheduled(cron = "0 40 17 * * *")
     public void generarBackup() {
         try {
             // Fecha para el nombre del archivo

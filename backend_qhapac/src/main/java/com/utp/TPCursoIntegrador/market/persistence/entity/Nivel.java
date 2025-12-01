@@ -11,13 +11,6 @@ public class Nivel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
-    private Integer id_Nivel;
-
-    private String nombre_Nivel;
-
-    private String desripcion_Nivel;
-=======
     @Column(name = "id_Nivel")
     private Integer idNivel;
 
@@ -26,7 +19,6 @@ public class Nivel {
 
     @Column(name = "descripcion_Nivel", length = 255)
     private String descripcionNivel;
->>>>>>> luis_sarmiento
 
     @ManyToOne
     @JoinColumn(name = "id_Periodo", nullable = false)
@@ -70,19 +62,6 @@ public class Nivel {
         this.periodo = periodo;
     }
 
-<<<<<<< HEAD
-    @Override
-    public String toString() {
-        return "Nivel{" +
-                "id_Nivel=" + id_Nivel +
-                ", nombre_Nivel='" + nombre_Nivel + '\'' +
-                ", desripcion_Nivel='" + desripcion_Nivel + '\'' +
-                ", periodo=" + periodo +
-                '}';
-    }
-
-=======
     public List<Tema> getTema() { return tema; }
     public void setTema(List<Tema> tema) { this.tema = tema; }
->>>>>>> luis_sarmiento
 }

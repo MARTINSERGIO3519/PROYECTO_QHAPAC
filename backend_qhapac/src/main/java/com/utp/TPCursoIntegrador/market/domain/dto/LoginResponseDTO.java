@@ -44,12 +44,9 @@ public class LoginResponseDTO {
     public Integer getIdRol() { return idRol; }
     public void setIdRol(Integer idRol) { this.idRol = idRol; }
 
-<<<<<<< HEAD
-=======
     public String getToken() { return token; }
     public void setToken(String token) { this.token = token; }
 
->>>>>>> luis_sarmiento
     @Override
     public String toString() {
         return "LoginResponseDTO{" +
@@ -58,13 +55,7 @@ public class LoginResponseDTO {
                 ", apellido='" + apellido + '\'' +
                 ", correo='" + correo + '\'' +
                 ", idRol=" + idRol +
-<<<<<<< HEAD
-                '}';
-    }
-}
-=======
                 ", token='" + (token != null ? "***" : "null") + '\'' +
                 '}';
     }
 }
->>>>>>> luis_sarmiento
