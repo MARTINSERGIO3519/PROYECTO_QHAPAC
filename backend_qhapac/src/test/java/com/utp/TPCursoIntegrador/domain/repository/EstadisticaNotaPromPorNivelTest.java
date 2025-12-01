@@ -1,7 +1,11 @@
 package com.utp.TPCursoIntegrador.domain.repository;
 
+<<<<<<< HEAD
 import com.utp.TPCursoIntegrador.market.domain.repository.EstadisticaNotaPromPorNivel;
 import com.utp.TPCursoIntegrador.market.persistence.entity.Estadistica_Nivel;
+=======
+import com.utp.TPCursoIntegrador.market.persistence.entity.EstadisticaNivel;
+>>>>>>> luis_sarmiento
 import com.utp.TPCursoIntegrador.market.domain.dto.Estadistica_Nota_Prom_Nivel_DTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,12 +24,20 @@ public class EstadisticaNotaPromPorNivelTest {
     @Mock
     private EstadisticaNotaPromPorNivel estadisticaNotaPromPorNivelRepository;  // Mock del repositorio
 
+<<<<<<< HEAD
     private Estadistica_Nivel estadisticaNivel;
+=======
+    private EstadisticaNivel estadisticaNivel;
+>>>>>>> luis_sarmiento
 
     @BeforeEach
     public void setup() {
         // Creamos la instancia de Estadistica_Nivel que será utilizada en los tests
+<<<<<<< HEAD
         estadisticaNivel = new Estadistica_Nivel();
+=======
+        estadisticaNivel = new EstadisticaNivel();
+>>>>>>> luis_sarmiento
         estadisticaNivel.setId_Estadistica_Nivel(1);
         estadisticaNivel.setNota_Promedio(85);
         estadisticaNivel.setPartidas_Jugadas(10);

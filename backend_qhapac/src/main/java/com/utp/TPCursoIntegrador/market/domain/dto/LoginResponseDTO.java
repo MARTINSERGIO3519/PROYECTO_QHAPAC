@@ -6,8 +6,9 @@ public class LoginResponseDTO {
     private String apellido;
     private String correo;
     private Integer idRol;
+    private String token; // ✅ Asegúrate de que tenga este campo
 
-    // Constructor, getters y setters
+    // Constructores
     public LoginResponseDTO() {}
 
     public LoginResponseDTO(Integer usuarioId, String nombre, String apellido, String correo, Integer idRol) {
@@ -18,6 +19,16 @@ public class LoginResponseDTO {
         this.idRol = idRol;
     }
 
+    public LoginResponseDTO(Integer usuarioId, String nombre, String apellido, String correo, Integer idRol, String token) {
+        this.usuarioId = usuarioId;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.idRol = idRol;
+        this.token = token;
+    }
+
+    // Getters y Setters
     public Integer getUsuarioId() { return usuarioId; }
     public void setUsuarioId(Integer usuarioId) { this.usuarioId = usuarioId; }
 
@@ -33,6 +44,12 @@ public class LoginResponseDTO {
     public Integer getIdRol() { return idRol; }
     public void setIdRol(Integer idRol) { this.idRol = idRol; }
 
+<<<<<<< HEAD
+=======
+    public String getToken() { return token; }
+    public void setToken(String token) { this.token = token; }
+
+>>>>>>> luis_sarmiento
     @Override
     public String toString() {
         return "LoginResponseDTO{" +
@@ -41,6 +58,13 @@ public class LoginResponseDTO {
                 ", apellido='" + apellido + '\'' +
                 ", correo='" + correo + '\'' +
                 ", idRol=" + idRol +
+<<<<<<< HEAD
                 '}';
     }
 }
+=======
+                ", token='" + (token != null ? "***" : "null") + '\'' +
+                '}';
+    }
+}
+>>>>>>> luis_sarmiento

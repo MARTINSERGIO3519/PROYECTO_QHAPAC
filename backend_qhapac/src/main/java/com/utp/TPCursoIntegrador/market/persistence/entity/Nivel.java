@@ -1,51 +1,65 @@
 package com.utp.TPCursoIntegrador.market.persistence.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
-@Table(name="nivel")
+@Table(name = "Nivel")
 public class Nivel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD
     private Integer id_Nivel;
 
     private String nombre_Nivel;
 
     private String desripcion_Nivel;
+=======
+    @Column(name = "id_Nivel")
+    private Integer idNivel;
+
+    @Column(name = "nombre_Nivel", nullable = false, length = 50)
+    private String nombreNivel;
+
+    @Column(name = "descripcion_Nivel", length = 255)
+    private String descripcionNivel;
+>>>>>>> luis_sarmiento
 
     @ManyToOne
-    @JoinColumn(name= "id_Periodo")
+    @JoinColumn(name = "id_Periodo", nullable = false)
     private Periodo periodo;
 
-    public Integer getId_Nivel() {
-        return id_Nivel;
+    // Un nivel tiene muchos temas
+    @JsonIgnore
+    @OneToMany(mappedBy = "nivel", cascade = CascadeType.ALL)
+    private List<Tema> tema;
+
+    // ----- Getters & Setters -----
+    public Integer getIdNivel() {
+        return idNivel;
     }
 
-    public void setId_Nivel(Integer id_Nivel) {
-        this.id_Nivel = id_Nivel;
+    public void setIdNivel(Integer idNivel) {
+        this.idNivel = idNivel;
     }
 
-    public String getNombre_Nivel() {
-        return nombre_Nivel;
+    public String getNombreNivel() {
+        return nombreNivel;
     }
 
-    public void setNombre_Nivel(String nombre_Nivel) {
-        this.nombre_Nivel = nombre_Nivel;
+    public void setNombreNivel(String nombreNivel) {
+        this.nombreNivel = nombreNivel;
     }
 
-    public String getDesripcion_Nivel() {
-        return desripcion_Nivel;
+    public String getDescripcionNivel() {
+        return descripcionNivel;
     }
 
-    public void setDesripcion_Nivel(String desripcion_Nivel) {
-        this.desripcion_Nivel = desripcion_Nivel;
+    public void setDescripcionNivel(String descripcionNivel) {
+        this.descripcionNivel = descripcionNivel;
     }
 
     public Periodo getPeriodo() {
@@ -56,6 +70,7 @@ public class Nivel {
         this.periodo = periodo;
     }
 
+<<<<<<< HEAD
     @Override
     public String toString() {
         return "Nivel{" +
@@ -66,4 +81,8 @@ public class Nivel {
                 '}';
     }
 
+=======
+    public List<Tema> getTema() { return tema; }
+    public void setTema(List<Tema> tema) { this.tema = tema; }
+>>>>>>> luis_sarmiento
 }

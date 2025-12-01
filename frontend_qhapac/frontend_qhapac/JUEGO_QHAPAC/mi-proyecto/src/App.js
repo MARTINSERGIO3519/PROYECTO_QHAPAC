@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+// src/App.js
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from './hooks/useAuth';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Inicio from './pages/Inicio';
@@ -16,24 +18,47 @@ import DashboardContenido from './pages/DashboardContenido';
 import DashboardEstadisticas from './pages/DashboardEstadisticas';
 import DashboardAcciones from './pages/DashboardAcciones';
 import DashboardSugerencias from './pages/DashboardSugerencias';
+import './App.css';
 
 // Componente para proteger rutas
 const RutaProtegida = ({ children }) => {
-  const usuario = JSON.parse(localStorage.getItem('usuario'));
-  return usuario ? children : <Navigate to="/login" />;
+  const { isAuthenticated, loading } = useAuth();
+  
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+        <span className="ml-3">Verificando autenticación...</span>
+      </div>
+    );
+  }
+  
+  return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
 
 // Componente para rutas de admin
 const RutaAdmin = ({ children }) => {
-  const usuario = JSON.parse(localStorage.getItem('usuario'));
-  return usuario && usuario.idRol === 1 ? children : <Navigate to="/inicio" />;
+  const { isAuthenticated, user, loading } = useAuth();
+  
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+        <span className="ml-3">Verificando permisos...</span>
+      </div>
+    );
+  }
+  
+  return isAuthenticated && user && user.idRol === 1 ? children : <Navigate to="/inicio" replace />;
 };
 
 // Componente wrapper para manejar layout con/sin navbar
-function Layout({ children, mostrarNavbar = true, usuario, cerrarSesion }) {
+function Layout({ children, mostrarNavbar = true }) {
+  const { user, logout } = useAuth();
+  
   return (
     <>
-      {mostrarNavbar && <Navbar usuario={usuario} cerrarSesion={cerrarSesion} />}
+      {mostrarNavbar && <Navbar usuario={user} cerrarSesion={logout} />}
       <main style={{ minHeight: 'calc(100vh - 200px)' }}>
         {children}
       </main>
@@ -43,61 +68,56 @@ function Layout({ children, mostrarNavbar = true, usuario, cerrarSesion }) {
 }
 
 function AppContent() {
-  const [usuario, setUsuario] = useState(null);
+  const { login, user, loading, shouldRedirect, clearRedirect } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
 
-  // Cargar usuario desde localStorage al iniciar
+  // Efecto para manejar redirección después del logout
   useEffect(() => {
-    const usuarioGuardado = localStorage.getItem("usuario");
-    if (usuarioGuardado) {
-      try {
-        setUsuario(JSON.parse(usuarioGuardado));
-      } catch (error) {
-        console.error('Error parsing usuario:', error);
-        localStorage.removeItem("usuario");
-      }
+    if (shouldRedirect) {
+      console.log("🔄 Redirigiendo a login después del logout...");
+      console.log("📊 Estado actual - user:", user, "shouldRedirect:", shouldRedirect);
+      clearRedirect();
+      navigate('/login', { replace: true });
     }
-  }, []);
+  }, [shouldRedirect, navigate, clearRedirect]);
 
-  const manejarLogin = (usuarioData) => {
-    setUsuario(usuarioData);
-  };
-
-  const cerrarSesion = () => {
-    localStorage.removeItem("usuario");
-    setUsuario(null);
-  };
-
-  // SOLUCIÓN ALTERNATIVA: Verificar si la ruta contiene alguna de estas palabras
+  // Determinar si mostrar navbar
   const mostrarNavbar = !location.pathname.includes('login') && 
                        !location.pathname.includes('recuperar') && 
                        !location.pathname.includes('cambiar');
 
+  // Mostrar loading mientras se verifica la autenticación
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+        <span className="ml-3">Cargando aplicación...</span>
+      </div>
+    );
+  }
+
   return (
-    <Layout 
-      mostrarNavbar={mostrarNavbar} 
-      usuario={usuario} 
-      cerrarSesion={cerrarSesion}
-    >
+    <Layout mostrarNavbar={mostrarNavbar}>
       <Routes>
         {/* Redirigir a inicio si está logueado, sino a login */}
         <Route path="/" element={
-          usuario ? <Navigate to="/inicio" /> : <Navigate to="/login" />
+          user ? <Navigate to="/inicio" replace /> : <Navigate to="/login" replace />
         } />
 
         {/* Login - accesible solo si no está logueado */}
         <Route path="/login" element={
-          usuario ? <Navigate to="/inicio" /> : <Login onLogin={manejarLogin} />
+          user ? <Navigate to="/inicio" replace /> : <Login onLogin={login} />
         } />
 
         {/* Recuperar contraseña - ACCESIBLE SIN LOGIN */}
         <Route path="/recuperar-contraseña" element={
-          usuario ? <Navigate to="/inicio" /> : <RecuperarContraseña />
+          user ? <Navigate to="/inicio" replace /> : <RecuperarContraseña />
         } />
 
-        {/* Cambiar contraseña - ACCESIBLE SIN LOGIN (porque el usuario puede no estar logueado) */}
+        {/* Cambiar contraseña - ACCESIBLE SIN LOGIN */}
         <Route path="/cambiar-contraseña" element={
-          usuario ? <Navigate to="/inicio" /> : <CambiarContraseña />
+          user ? <Navigate to="/inicio" replace /> : <CambiarContraseña />
         } />
 
         {/* Rutas protegidas */}
@@ -132,7 +152,7 @@ function AppContent() {
           </RutaAdmin>
         } />
 
-         {/* Dashboard General - solo para administradores */}
+        {/* Dashboard General - solo para administradores */}
         <Route path="/dashboard-general" element={
           <RutaAdmin><DashboardGeneral /></RutaAdmin>
         } />
@@ -151,7 +171,7 @@ function AppContent() {
         } />
 
         {/* Ruta de fallback */}
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Layout>
   );

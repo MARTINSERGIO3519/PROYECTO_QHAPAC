@@ -8,6 +8,7 @@ function Perfil() {
   const [cambiandoPassword, setCambiandoPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [mensaje, setMensaje] = useState('');
+  const [esExito, setEsExito] = useState(false);
   
   // Estados para el formulario de edición
   const [formData, setFormData] = useState({
@@ -28,6 +29,30 @@ function Perfil() {
   const [mostrarConfirmar, setMostrarConfirmar] = useState(false);
 
   const navigate = useNavigate();
+
+  // Función para obtener el token JWT
+  const getAuthToken = () => {
+    return localStorage.getItem('token');
+  };
+
+  // Función para hacer peticiones autenticadas
+  const fetchWithAuth = async (url, options = {}) => {
+    const token = getAuthToken();
+    
+    const headers = {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    };
+
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    return fetch(url, {
+      ...options,
+      headers,
+    });
+  };
 
   // Cargar datos del usuario al montar el componente
   useEffect(() => {
@@ -63,8 +88,9 @@ function Perfil() {
     e.preventDefault();
     setLoading(true);
     setMensaje('');
+    setEsExito(false);
 
-    const idUsuario = usuario.id;
+    const idUsuario = usuario?.id;
     
     if (!idUsuario) {
       setMensaje('❌ No se pudo obtener el ID del usuario');
@@ -73,11 +99,10 @@ function Perfil() {
     }
 
     try {
-      const response = await fetch("http://localhost:8090/api/usuarios/actualizar-perfil", {
+      console.log("🔄 Actualizando perfil para usuario ID:", idUsuario);
+      
+      const response = await fetchWithAuth("http://localhost:8090/api/usuarios/actualizar-perfil", {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({
           idUsuario: idUsuario,
           nombre: formData.nombre,
@@ -85,10 +110,24 @@ function Perfil() {
         })
       });
 
-      const data = await response.json();
+      console.log("📨 Respuesta - Status:", response.status);
+      console.log("📨 Respuesta - OK:", response.ok);
+
+      let responseData;
+      const contentType = response.headers.get("content-type");
+      
+      // Manejar diferentes tipos de respuesta
+      if (contentType && contentType.includes("application/json")) {
+        responseData = await response.json();
+      } else {
+        const responseText = await response.text();
+        responseData = { mensaje: responseText };
+      }
 
       if (response.ok) {
-        setMensaje("✅ Perfil actualizado exitosamente");
+        const mensajeExito = responseData.mensaje || "Perfil actualizado exitosamente";
+        setMensaje("✅ " + mensajeExito);
+        setEsExito(true);
         
         // Actualizar localStorage
         const usuarioActualizado = {
@@ -101,10 +140,18 @@ function Perfil() {
         
         setEditando(false);
       } else {
-        setMensaje("❌ " + (data.mensaje || "Error al actualizar el perfil"));
+        const errorMensaje = responseData.mensaje || "Error al actualizar el perfil";
+        
+        if (response.status === 403) {
+          setMensaje("❌ Acceso denegado. Tu sesión puede haber expirado. Por favor, inicia sesión nuevamente.");
+        } else if (response.status === 401) {
+          setMensaje("❌ No autorizado. Tu token de autenticación es inválido.");
+        } else {
+          setMensaje("❌ " + errorMensaje);
+        }
       }
     } catch (error) {
-      console.error(error);
+      console.error("💥 Error completo:", error);
       setMensaje("❌ Error de conexión con el servidor");
     } finally {
       setLoading(false);
@@ -116,30 +163,33 @@ function Perfil() {
     
     if (passwordData.nuevaContrasenia !== passwordData.confirmarContrasenia) {
       setMensaje('❌ Las contraseñas no coinciden');
+      setEsExito(false);
       return;
     }
 
     if (passwordData.nuevaContrasenia.length < 6) {
       setMensaje('❌ La contraseña debe tener al menos 6 caracteres');
+      setEsExito(false);
       return;
     }
 
-    const idUsuario = usuario.id;
+    const idUsuario = usuario?.id;
     
     if (!idUsuario) {
       setMensaje('❌ No se pudo obtener el ID del usuario');
+      setEsExito(false);
       return;
     }
 
     setLoading(true);
     setMensaje('');
+    setEsExito(false);
 
     try {
-      const response = await fetch("http://localhost:8090/api/usuarios/cambiar-contrasenia", {
+      console.log("🔄 Cambiando contraseña para usuario ID:", idUsuario);
+      
+      const response = await fetchWithAuth("http://localhost:8090/api/usuarios/cambiar-contrasenia", {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({
           idUsuario: idUsuario,
           contraseniaActual: passwordData.contraseniaActual,
@@ -147,10 +197,23 @@ function Perfil() {
         })
       });
 
-      const data = await response.json();
+      console.log("📨 Respuesta - Status:", response.status);
+
+      let responseData;
+      const contentType = response.headers.get("content-type");
+      
+      if (contentType && contentType.includes("application/json")) {
+        responseData = await response.json();
+      } else {
+        const responseText = await response.text();
+        responseData = { mensaje: responseText };
+      }
 
       if (response.ok) {
-        setMensaje("✅ Contraseña actualizada exitosamente");
+        const mensajeExito = responseData.mensaje || "Contraseña actualizada exitosamente";
+        setMensaje("✅ " + mensajeExito);
+        setEsExito(true);
+        
         setCambiandoPassword(false);
         setPasswordData({
           contraseniaActual: '',
@@ -158,10 +221,18 @@ function Perfil() {
           confirmarContrasenia: ''
         });
       } else {
-        setMensaje("❌ " + (data.mensaje || "Error al cambiar la contraseña"));
+        const errorMensaje = responseData.mensaje || "Error al cambiar la contraseña";
+        
+        if (response.status === 403) {
+          setMensaje("❌ Acceso denegado. Tu sesión puede haber expirado.");
+        } else if (response.status === 401) {
+          setMensaje("❌ No autorizado. Tu token de autenticación es inválido.");
+        } else {
+          setMensaje("❌ " + errorMensaje);
+        }
       }
     } catch (error) {
-      console.error(error);
+      console.error("💥 Error completo:", error);
       setMensaje("❌ Error de conexión con el servidor");
     } finally {
       setLoading(false);
@@ -199,8 +270,17 @@ function Perfil() {
               
               <div className="card-body p-4">
                 {mensaje && (
-                  <div className={`alert ${mensaje.includes('✅') ? 'alert-success' : 'alert-danger'} mb-4`}>
+                  <div className={`alert ${esExito ? 'alert-success' : 'alert-danger'} mb-4`}>
                     {mensaje}
+                    {!esExito && (
+                      <div className="mt-2">
+                        <small>
+                          <strong>Token:</strong> {getAuthToken() ? '✅ Presente' : '❌ Ausente'}
+                          <br />
+                          <strong>Usuario ID:</strong> {usuario?.id || 'No disponible'}
+                        </small>
+                      </div>
+                    )}
                   </div>
                 )}
 
@@ -254,7 +334,6 @@ function Perfil() {
                             </div>
                           </div>
                         </div>
-                        
                         <div className="text-center text-md-start mt-4">
                           <button 
                             className="btn btn-perfil btn-edit btn-pulse"
@@ -312,7 +391,10 @@ function Perfil() {
                             disabled={loading}
                           >
                             {loading ? (
-                              <span className="btn-loading"></span>
+                              <>
+                                <span className="spinner-border spinner-border-sm me-2" role="status"></span>
+                                Guardando...
+                              </>
                             ) : (
                               <>
                                 <i className="bi bi-check-circle-fill me-2"></i>
@@ -441,7 +523,10 @@ function Perfil() {
                           disabled={loading}
                         >
                           {loading ? (
-                            <span className="btn-loading"></span>
+                            <>
+                              <span className="spinner-border spinner-border-sm me-2" role="status"></span>
+                              Cambiando...
+                            </>
                           ) : (
                             <>
                               <i className="bi bi-shield-check me-2"></i>

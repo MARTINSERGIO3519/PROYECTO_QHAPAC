@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function CambiarContraseña() {
+function CambiarContraseña({ volverLogin, email }) {
   const [codigo, setCodigo] = useState('');
   const [nuevaContrasenia, setNuevaContrasenia] = useState('');
   const [confirmarContrasenia, setConfirmarContrasenia] = useState('');
@@ -9,6 +9,7 @@ function CambiarContraseña() {
   const [nuevaVisible, setNuevaVisible] = useState(false);
   const [confirmarVisible, setConfirmarVisible] = useState(false);
   const [mensaje, setMensaje] = useState('');
+  const [esExito, setEsExito] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -16,52 +17,86 @@ function CambiarContraseña() {
     
     if (!codigo || !nuevaContrasenia || !confirmarContrasenia) {
       setMensaje('❌ Todos los campos son obligatorios');
+      setEsExito(false);
       return;
     }
     
     if (nuevaContrasenia !== confirmarContrasenia) {
       setMensaje('❌ Las contraseñas no coinciden');
+      setEsExito(false);
       return;
     }
 
     if (nuevaContrasenia.length < 6) {
       setMensaje('❌ La contraseña debe tener al menos 6 caracteres');
+      setEsExito(false);
       return;
     }
 
     setLoading(true);
     setMensaje('');
+    setEsExito(false);
     
     try {
+      console.log("🔄 Enviando solicitud de cambio de contraseña...");
+      
       const response = await fetch("http://localhost:8090/api/auth/reset-password", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
         body: JSON.stringify({
           codigoTemporal: codigo,
           nuevaContrasenia: nuevaContrasenia
         })
       });
 
-      const data = await response.json();
+      console.log("📨 Respuesta recibida - Status:", response.status);
+
+      let responseData;
+      const contentType = response.headers.get("content-type");
+      
+      if (contentType && contentType.includes("application/json")) {
+        responseData = await response.json();
+      } else {
+        const responseText = await response.text();
+        responseData = { mensaje: responseText };
+      }
 
       if (response.ok) {
-        setMensaje("✅ " + (data.mensaje || "Contraseña actualizada exitosamente"));
+        const mensajeExito = responseData.mensaje || "Contraseña actualizada exitosamente";
+        setMensaje("✅ " + mensajeExito);
+        setEsExito(true); // Marcar como éxito
+        
+        // Redirigir al login después de 3 segundos
         setTimeout(() => {
-          navigate('/login'); // Redirigir al login después del éxito
+          if (volverLogin) {
+            volverLogin();
+          } else {
+            navigate('/login');
+          }
         }, 3000);
       } else {
-        setMensaje("❌ " + (data.mensaje || "Error al actualizar la contraseña")); // Cambié data.error por data.mensaje
+        const errorMensaje = responseData.mensaje || "Error al actualizar la contraseña";
+        setMensaje("❌ " + errorMensaje);
+        setEsExito(false);
       }
     } catch (error) {
-      console.error(error);
+      console.error("💥 Error completo:", error);
       setMensaje("❌ Error de conexión con el servidor");
+      setEsExito(false);
     } finally {
       setLoading(false);
     }
   };
 
   const handleVolverLogin = () => {
-    navigate('/login'); // Navegar al login
+    if (volverLogin) {
+      volverLogin();
+    } else {
+      navigate('/login');
+    }
   };
 
   return (
@@ -69,9 +104,22 @@ function CambiarContraseña() {
       <form className="login-form p-4 shadow rounded bg-white" onSubmit={handleSubmit}>
         <h2 className="text-center mb-4">Cambiar Contraseña</h2>
 
+        {email && (
+          <div className="alert alert-info">
+            <strong>Correo:</strong> {email}
+            <br />
+            <small>Se ha enviado un código a este correo</small>
+          </div>
+        )}
+
         {mensaje && (
-          <div className={`alert ${mensaje.includes('✅') ? 'alert-success' : 'alert-danger'}`}>
+          <div className={`alert ${esExito ? 'alert-success' : 'alert-danger'}`}>
             {mensaje}
+            {esExito && (
+              <div className="mt-2">
+                <small>Redirigiendo al login...</small>
+              </div>
+            )}
           </div>
         )}
 
@@ -80,7 +128,7 @@ function CambiarContraseña() {
           <input 
             type="text" 
             className="form-control" 
-            placeholder="Ingresa el código que recibiste por correo"
+            placeholder="Ingresa el código de 6 dígitos que recibiste por correo"
             value={codigo} 
             onChange={(e) => setCodigo(e.target.value)} 
             disabled={loading}
@@ -94,6 +142,7 @@ function CambiarContraseña() {
             <input 
               type={nuevaVisible ? "text" : "password"} 
               className="form-control" 
+              placeholder="Mínimo 6 caracteres"
               value={nuevaContrasenia} 
               onChange={(e) => setNuevaContrasenia(e.target.value)} 
               disabled={loading}
@@ -117,6 +166,7 @@ function CambiarContraseña() {
             <input 
               type={confirmarVisible ? "text" : "password"} 
               className="form-control" 
+              placeholder="Repite tu nueva contraseña"
               value={confirmarContrasenia} 
               onChange={(e) => setConfirmarContrasenia(e.target.value)} 
               disabled={loading}
@@ -135,7 +185,14 @@ function CambiarContraseña() {
         </div>
 
         <button type="submit" className="btn btn-warning w-100 mb-2" disabled={loading}>
-          {loading ? "Actualizando..." : "Actualizar Contraseña"}
+          {loading ? (
+            <>
+              <span className="spinner-border spinner-border-sm me-2" role="status"></span>
+              Actualizando...
+            </>
+          ) : (
+            "Actualizar Contraseña"
+          )}
         </button>
 
         <button 

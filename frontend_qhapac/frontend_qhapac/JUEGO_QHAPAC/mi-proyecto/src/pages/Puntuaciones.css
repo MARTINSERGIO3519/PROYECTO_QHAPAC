@@ -1,51 +1,78 @@
-/* Contenedor centrado */
-.container {
-  font-family: "Poppins", sans-serif;
+/* Puntuaciones.css */
+
+/* Contenedor principal */
+div.p-6 {
+  display: flex;
+  justify-content: center;  /* Centra horizontalmente */
+  align-items: center;      /* Centra verticalmente si hay altura */
+  flex-direction: column;
+  min-height: 80vh;         /* Ocupa casi toda la pantalla */
+  background: #f0f4f8;      /* Fondo suave */
+  padding: 2rem;
 }
 
 /* Título */
 h2 {
-  color: #4e73df;  /* azul del admin */
-  font-weight: bold;
-  margin-bottom: 20px;
   text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
-/* Tabla principal */
-.table {
-  width: 90%;
-  margin: 0 auto;
+/* Tabla */
+table {
+  width: 80%;                /* Más grande */
   border-collapse: collapse;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background: #fff;
+  border-radius: 12px;
   overflow: hidden;
 }
 
 /* Encabezado */
-.table-dark, .table thead th {
-  background-color: #4e73df;  /* azul admin */
+thead tr {
+  background-color: #4e73df;  /* Verde elegante */
   color: white;
-  font-weight: bold;
-  padding: 12px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+th, td {
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
   text-align: center;
 }
 
 /* Filas */
-.table tbody td {
-  background-color: #f8f9fc; /* fondo claro */
-  text-align: center;
-  padding: 12px;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-  cursor: default;
+tbody tr {
+  transition: all 0.3s ease;
 }
 
-/* Filas impares */
-.table-striped tbody tr:nth-of-type(odd) {
-  background-color: #e9ecef; /* azul claro suave */
+tbody tr:hover {
+  background-color: #f1f1f1;
+  transform: scale(1.02);
 }
 
-/* Hover */
-.table tbody tr:hover td {
-  background-color: #d1d9f7; /* azul más suave al pasar el mouse */
+/* Mensaje "No hay puntuaciones" */
+tbody td[colspan="5"] {
+  font-size: 1.2rem;
+  color: #666;
+  padding: 2rem;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  table {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  th, td {
+    padding: 0.7rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
 }

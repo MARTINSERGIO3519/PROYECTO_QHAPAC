@@ -1,10 +1,13 @@
 package com.utp.TPCursoIntegrador.market.web.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -15,20 +18,39 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
-                        // Permitir acceso público a estos endpoints
+                        // Endpoints públicos - TODOS LOS ENDPOINTS DE AUTENTICACIÓN Y USUARIOS
                         .requestMatchers(
-                                "/api/auth/**",
-                                "/api/usuarios/**",
-                                "/api/admin/**"  // ← AGREGAR ESTA LÍNEA
+                                "/api/auth/**",           // ✅ TODOS LOS ENDPOINTS DE AUTH
+                                "/api/usuarios/registro", // ✅ REGISTRO DE USUARIOS
+                                "/api/usuarios/health",   // ✅ HEALTH CHECK
+                                "/password/**",           // ✅ RECUPERACIÓN CONTRASEÑA
+                                "/test-connection/**",    // ✅ TEST CONNECTION
+                                "/",                      // ✅ HOME
+                                "/health",                // ✅ HEALTH
+                                "/actuator/**"            // ✅ SPRING ACTUATOR
                         ).permitAll()
+                        // Endpoints de admin requieren rol ADMIN
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        // Endpoints que requieren autenticación (agregar explícitamente)
+                        .requestMatchers(
+                                "/api/usuarios/**",       // ✅ ENDPOINTS DE USUARIOS AUTENTICADOS
+                                "/logros",                // ✅ ENDPOINT DE LOGROS
+                                "/logros/**"              // ✅ TODOS LOS ENDPOINTS DE LOGROS
+                        ).authenticated()
+                        // Todos los demás endpoints requieren autenticación
                         .anyRequest().authenticated()
-                );
+                )
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
